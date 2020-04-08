@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		284EB367243D782A007DF561 /* FoodDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284EB366243D782A007DF561 /* FoodDetails.swift */; };
 		D13B2D93243849FE004CE335 /* SF-Compact-Text-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D13B2D42243849FB004CE335 /* SF-Compact-Text-Ultralight.otf */; };
 		D13B2D94243849FE004CE335 /* SF-Compact-Text-HeavyItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D13B2D43243849FB004CE335 /* SF-Compact-Text-HeavyItalic.otf */; };
 		D13B2D95243849FE004CE335 /* SF-Compact-Rounded-Semibold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D13B2D44243849FB004CE335 /* SF-Compact-Rounded-Semibold.otf */; };
@@ -101,6 +102,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		284EB366243D782A007DF561 /* FoodDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDetails.swift; sourceTree = "<group>"; };
 		D13B2D42243849FB004CE335 /* SF-Compact-Text-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-Ultralight.otf"; path = "../../../../../../../Library/Fonts/SF-Compact-Text-Ultralight.otf"; sourceTree = "<group>"; };
 		D13B2D43243849FB004CE335 /* SF-Compact-Text-HeavyItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-HeavyItalic.otf"; path = "../../../../../../../Library/Fonts/SF-Compact-Text-HeavyItalic.otf"; sourceTree = "<group>"; };
 		D13B2D44243849FB004CE335 /* SF-Compact-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Rounded-Semibold.otf"; path = "../../../../../../../Library/Fonts/SF-Compact-Rounded-Semibold.otf"; sourceTree = "<group>"; };
@@ -303,6 +305,7 @@
 				D13B2DEA24385DE2004CE335 /* RecipeDetailVC.swift */,
 				D13B2DEC24385DF9004CE335 /* ProfileVC.swift */,
 				D13B2DF224385F8B004CE335 /* OnBoardVC.swift */,
+				284EB366243D782A007DF561 /* FoodDetails.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -510,6 +513,7 @@
 				D13B2DE724385DA8004CE335 /* AboutMeVC.swift in Sources */,
 				D13B2DED24385DF9004CE335 /* ProfileVC.swift in Sources */,
 				D13B2DEB24385DE2004CE335 /* RecipeDetailVC.swift in Sources */,
+				284EB367243D782A007DF561 /* FoodDetails.swift in Sources */,
 				D1DA569D243845F100F68FCC /* AppDelegate.swift in Sources */,
 				D13B2DF324385F8B004CE335 /* OnBoardVC.swift in Sources */,
 				D1DA569F243845F100F68FCC /* SceneDelegate.swift in Sources */,

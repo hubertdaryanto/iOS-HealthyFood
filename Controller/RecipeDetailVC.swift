@@ -9,14 +9,21 @@
 import UIKit
 
 class RecipeDetailVC: UIViewController {
-
+    
+    @IBOutlet var recipeTable: UITableView!
+   
+    let sectionTitles = ["Ingredients", "How to Cook"]
+    
+    let foodsDetails = [FoodDetails(foodName: "Nasi Goreng", calories: 999, type: "Lunch", ingredients: ["bawang", "nasi", "kecap"], steps: ["a", "b"])]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        recipeTable.delegate = self
+        recipeTable.dataSource = self
         // Do any additional setup after loading the view.
     }
     
-
     /*
     // MARK: - Navigation
 
@@ -27,4 +34,34 @@ class RecipeDetailVC: UIViewController {
     }
     */
 
+}
+
+extension RecipeDetailVC: UITableViewDelegate {
+    //untuk tap" dari cell atau kerja dari cell
+}
+
+extension RecipeDetailVC: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if sectionTitles[section] == 1 {
+            
+        }
+        
+        return 4 //angka sementara untuk jumlah rows
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return sectionTitles[section]
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableCell", for: indexPath)
+        cell.textLabel?.text = "abc" //placeholder
+        return cell
+    }
+    
 }
