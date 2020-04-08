@@ -90,10 +90,13 @@
 		D13B2DE2243849FE004CE335 /* SF-Pro-Text-SemiboldItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D13B2D91243849FE004CE335 /* SF-Pro-Text-SemiboldItalic.otf */; };
 		D13B2DE3243849FE004CE335 /* SF-Compact-Text-RegularItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = D13B2D92243849FE004CE335 /* SF-Compact-Text-RegularItalic.otf */; };
 		D13B2DE724385DA8004CE335 /* AboutMeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13B2DE624385DA8004CE335 /* AboutMeVC.swift */; };
-		D13B2DE924385DCD004CE335 /* MyMealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13B2DE824385DCD004CE335 /* MyMealVC.swift */; };
 		D13B2DEB24385DE2004CE335 /* RecipeDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13B2DEA24385DE2004CE335 /* RecipeDetailVC.swift */; };
 		D13B2DED24385DF9004CE335 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13B2DEC24385DF9004CE335 /* ProfileVC.swift */; };
 		D13B2DF324385F8B004CE335 /* OnBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13B2DF224385F8B004CE335 /* OnBoardVC.swift */; };
+		D148E267243CDDFB0097CC2B /* MealData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D148E266243CDDFB0097CC2B /* MealData.swift */; };
+		D1DA2B0D243C372400064558 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA2B0C243C372400064558 /* Meal.swift */; };
+		D1DA2B11243C58F700064558 /* MealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA2B10243C58F700064558 /* MealCell.swift */; };
+		D1DA2B13243C5AD300064558 /* MealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA2B12243C5AD300064558 /* MealVC.swift */; };
 		D1DA569D243845F100F68FCC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA569C243845F100F68FCC /* AppDelegate.swift */; };
 		D1DA569F243845F100F68FCC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA569E243845F100F68FCC /* SceneDelegate.swift */; };
 		D1DA56A4243845F100F68FCC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D1DA56A2243845F100F68FCC /* Main.storyboard */; };
@@ -185,10 +188,13 @@
 		D13B2D91243849FE004CE335 /* SF-Pro-Text-SemiboldItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Pro-Text-SemiboldItalic.otf"; path = "../../../../../../../Library/Fonts/SF-Pro-Text-SemiboldItalic.otf"; sourceTree = "<group>"; };
 		D13B2D92243849FE004CE335 /* SF-Compact-Text-RegularItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-RegularItalic.otf"; path = "../../../../../../../Library/Fonts/SF-Compact-Text-RegularItalic.otf"; sourceTree = "<group>"; };
 		D13B2DE624385DA8004CE335 /* AboutMeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutMeVC.swift; sourceTree = "<group>"; };
-		D13B2DE824385DCD004CE335 /* MyMealVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMealVC.swift; sourceTree = "<group>"; };
 		D13B2DEA24385DE2004CE335 /* RecipeDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetailVC.swift; sourceTree = "<group>"; };
 		D13B2DEC24385DF9004CE335 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		D13B2DF224385F8B004CE335 /* OnBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardVC.swift; sourceTree = "<group>"; };
+		D148E266243CDDFB0097CC2B /* MealData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealData.swift; sourceTree = "<group>"; };
+		D1DA2B0C243C372400064558 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		D1DA2B10243C58F700064558 /* MealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCell.swift; sourceTree = "<group>"; };
+		D1DA2B12243C5AD300064558 /* MealVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealVC.swift; sourceTree = "<group>"; };
 		D1DA5699243845F100F68FCC /* HealthyFood.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HealthyFood.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D1DA569C243845F100F68FCC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D1DA569E243845F100F68FCC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -301,7 +307,6 @@
 			isa = PBXGroup;
 			children = (
 				D13B2DE624385DA8004CE335 /* AboutMeVC.swift */,
-				D13B2DE824385DCD004CE335 /* MyMealVC.swift */,
 				D13B2DEA24385DE2004CE335 /* RecipeDetailVC.swift */,
 				D13B2DEC24385DF9004CE335 /* ProfileVC.swift */,
 				D13B2DF224385F8B004CE335 /* OnBoardVC.swift */,
@@ -321,6 +326,8 @@
 		D13B2DEF24385E13004CE335 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				D1DA2B0C243C372400064558 /* Meal.swift */,
+				D148E266243CDDFB0097CC2B /* MealData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -509,14 +516,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D13B2DE924385DCD004CE335 /* MyMealVC.swift in Sources */,
 				D13B2DE724385DA8004CE335 /* AboutMeVC.swift in Sources */,
 				D13B2DED24385DF9004CE335 /* ProfileVC.swift in Sources */,
+				D1DA2B11243C58F700064558 /* MealCell.swift in Sources */,
 				D13B2DEB24385DE2004CE335 /* RecipeDetailVC.swift in Sources */,
 				284EB367243D782A007DF561 /* FoodDetails.swift in Sources */,
 				D1DA569D243845F100F68FCC /* AppDelegate.swift in Sources */,
+				D148E267243CDDFB0097CC2B /* MealData.swift in Sources */,
 				D13B2DF324385F8B004CE335 /* OnBoardVC.swift in Sources */,
 				D1DA569F243845F100F68FCC /* SceneDelegate.swift in Sources */,
+				D1DA2B13243C5AD300064558 /* MealVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
