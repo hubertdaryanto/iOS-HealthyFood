@@ -14,7 +14,7 @@ class RecipeDetailVC: UIViewController {
    
     let sectionTitles = ["Ingredients", "How to Cook"]
     
-    let foodsDetails = [FoodDetails(foodName: "Nasi Goreng", calories: 999, type: "Lunch", ingredients: ["bawang", "nasi", "kecap"], steps: ["a", "b"])]
+    let foodsDetails = FoodDetails(foodName: "Nasi Goreng", calories: 999, type: "Lunch", ingredients: ["bawang", "nasi", "kecap"], steps: ["a", "b"])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,10 +48,12 @@ extension RecipeDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if sectionTitles[section] == "Ingredients" {
-            return 
+            return foodsDetails.ingredients.count
         }
-        
-        return 4 //angka sementara untuk jumlah rows
+        else if sectionTitles[section] == "How to Cook" {
+            return foodsDetails.steps.count
+        }
+        return 0
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
