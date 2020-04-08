@@ -48,7 +48,7 @@ extension RecipeDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if sectionTitles[section] == "Ingredients" {
-            
+            return 
         }
         
         return 4 //angka sementara untuk jumlah rows
