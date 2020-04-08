@@ -11,14 +11,15 @@ import UIKit
 class RecipeDetailVC: UIViewController {
     
     @IBOutlet var recipeTable: UITableView!
-   
-    let sectionTitles = ["Ingredients", "How to Cook"]
+    @IBOutlet weak var foodNameLabel: UILabel!
+    
+    let sectionTitles = ["Calories", "Ingredients", "How to Cook"]
     
     let foodsDetails = FoodDetails(foodName: "Nasi Goreng", calories: 999, type: "Lunch", ingredients: ["bawang", "nasi", "kecap"], steps: ["a", "b"])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        foodNameLabel.text = foodsDetails.foodName
         recipeTable.delegate = self
         recipeTable.dataSource = self
         // Do any additional setup after loading the view.
@@ -43,11 +44,14 @@ extension RecipeDetailVC: UITableViewDelegate {
 extension RecipeDetailVC: UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if sectionTitles[section] == "Ingredients" {
+        if sectionTitles[section] == "Calories" {
+            return 1
+        }
+        else if sectionTitles[section] == "Ingredients" {
             return foodsDetails.ingredients.count
         }
         else if sectionTitles[section] == "How to Cook" {
@@ -62,7 +66,18 @@ extension RecipeDetailVC: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableCell", for: indexPath)
-        cell.textLabel?.text = "abc" //placeholder
+        
+        switch sectionTitles[indexPath.section] {
+        case "Calories":
+            cell.textLabel!.text = "\(foodsDetails.calories) kcal"
+        case "Ingredients":
+            cell.textLabel!.text = "\(indexPath.row + 1). \(foodsDetails.ingredients[indexPath.row])"
+        case "How to Cook":
+            cell.textLabel!.text = "\(indexPath.row + 1). \(foodsDetails.steps[indexPath.row])"
+        default:
+            cell.textLabel!.text = "\(foodsDetails.calories) + kcal"
+        }
+        
         return cell
     }
     
