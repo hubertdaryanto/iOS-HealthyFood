@@ -11,6 +11,7 @@ import UIKit
 class ProfileVC: UIViewController {
 
     @IBOutlet weak var bmiView: UIView!
+    @IBOutlet weak var planLabel: UILabel!
     @IBOutlet weak var planBtn: UIButton!
     @IBOutlet weak var heightView: UIView!
     @IBOutlet weak var weightView: UIView!
@@ -24,6 +25,7 @@ class ProfileVC: UIViewController {
     var updateWeightTextField: UITextField!
 
     let calories: Int = 3000
+    var flag: Int = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,17 +38,55 @@ class ProfileVC: UIViewController {
         let defaults = UserDefaults.standard
         let name = defaults.string(forKey: "name")
         let height = defaults.string(forKey: "height")
+        let target = defaults.string(forKey: "target")
+        let plan = defaults.string(forKey: "plan")
         let weight = defaults.string(forKey: "weight")
         let gender = defaults.string(forKey: "gender")
         let bmi = defaults.string(forKey: "bmi")
         
         nameLabel.text = "Hello, " + name!
-        planBtn.setTitle(defaults.string(forKey: "plan"), for: .normal)
+        planLabel.text = plan! + " Plan"
+        
+        var btnTitle = ""
+        if plan == "Gain Weight" {
+            btnTitle = String(format: "%.0f kg / Month", (target! as NSString).doubleValue - (weight! as NSString).doubleValue)
+        } else if plan == "Lose Weight" {
+            btnTitle = String(format: "%.0f kg / Month", (weight! as NSString).doubleValue - (target! as NSString).doubleValue)
+        }
+        
+        planBtn.setTitle(btnTitle, for: .normal)
+        
         heightLabel.text = height
         weightLabel.text = weight
         
         bmiLabel.text = String(format: "%.1f", (bmi! as NSString).doubleValue)
         calorieLeftLabel.text = gender == "Male" ? "\(calories)" : "\(calories - 1000)"
+    }
+    @IBAction func planBtnDidPressed(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        let target = defaults.string(forKey: "target")
+        let plan = defaults.string(forKey: "plan")
+        let weight = defaults.string(forKey: "weight")
+        var btnTitle = ""
+        if flag == 0 {
+            if plan == "Gain Weight" {
+                let kg = (target! as NSString).doubleValue - (weight! as NSString).doubleValue
+                btnTitle = String(format: "%.2f kg / Day", (kg / 30.0))
+               } else if plan == "Lose Weight" {
+                let kg = (weight! as NSString).doubleValue - (target! as NSString).doubleValue
+                   btnTitle = String(format: "%.2f kg / Day", (kg / 30.0))
+               }
+            flag = 1
+        } else {
+            if plan == "Gain Weight" {
+                btnTitle = String(format: "%.0f kg / Month", (target! as NSString).doubleValue - (weight! as NSString).doubleValue)
+            } else if plan == "Lose Weight" {
+                btnTitle = String(format: "%.0f kg / Month", (weight! as NSString).doubleValue - (target! as NSString).doubleValue)
+            }
+            flag = 0
+        }
+        
+        planBtn.setTitle(btnTitle, for: .normal)
     }
     
     func applyRoundedCorner(_ objects: [AnyObject]){

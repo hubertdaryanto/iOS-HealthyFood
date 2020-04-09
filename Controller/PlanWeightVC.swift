@@ -47,10 +47,7 @@ class PlanWeightVC: UIViewController {
             weightTargetTextField.resignFirstResponder()
         }
         
-        if pos == 0 {
-            //show alert if weight < target
-//            kg = (Double(target)! - Double(weight)!) / 30.0
-        } else if pos == 1 {
+        if pos == 1 {
             //words
 //            kg = 0.0
             weightTargetLabel.isHidden = true
@@ -58,11 +55,9 @@ class PlanWeightVC: UIViewController {
             weightTargetOkBtn.isHidden = true
             planKgLabel.isHidden = true
             inMonthLabel.isHidden = true
-        } else if pos == 2 {
-//            kg = (Double(weight)! - Double(target)!) / 30.0
         }
         
-        let kgDecimal = String(format: "%.2f", validateTarget(weight: Double(weight)!, target: Double(target)!, pos: pos))
+        let kgDecimal = String(format: "%.2f", validateTarget(weight: Double(weight)!, targetParam: Double(target)!, pos: pos))
         
         planKgLabel.text = "\(plans[pos]) \(kgDecimal) kg/day"
     }
@@ -78,28 +73,33 @@ class PlanWeightVC: UIViewController {
         alert.addAction(action)
         self.present(alert, animated: true, completion: nil)
     }
+    @IBAction func getStartedBtnDidPressed(_ sender: Any) {
+        UserDefaults.standard.set(weightTargetTextField.text, forKey: "target")
+        UserDefaults.standard.synchronize()
+        _ = validateInput(x: weightTargetTextField.text)
+    }
     
-    func validateTarget(weight: Double, target: Double, pos: Int) -> Double {
+    func validateTarget(weight: Double, targetParam: Double, pos: Int) -> Double {
         var kg = -1.0
         
         if pos == 0 { //gain
-            kg = (target - weight) / 30.0
+            kg = (targetParam - weight) / 30.0
             
-            if weight >= target {
+            if weight >= targetParam {
                 showInputAlert(x: 1, y: 0)
                 weightTargetTextField.text = String(format: "%.0f", weight)
-            } else if target > weight+4 {
+            } else if targetParam > weight+4 {
                 showInputAlert(x: 2, y: 0)
                 weightTargetTextField.text = String(format: "%.0f", weight + 4.0)
                 kg = ((weight+4) - weight) / 30
             }
         } else if pos == 2 { //lose
-            kg = (weight - target) / 30.0
+            kg = (weight - targetParam) / 30.0
             
-            if weight <= target {
+            if weight <= targetParam {
                 showInputAlert(x: 1, y: 1)
                 weightTargetTextField.text = String(format: "%.0f", weight)
-            } else if target < weight-4 {
+            } else if targetParam < weight-4 {
                 showInputAlert(x: 2, y: 1)
                 weightTargetTextField.text = String(format: "%.0f", weight - 4.0)
                 kg = (weight - (weight-4)) / 30
