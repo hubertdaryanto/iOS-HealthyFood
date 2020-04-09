@@ -12,10 +12,11 @@ class RecipeDetailVC: UIViewController {
     
     @IBOutlet var recipeTable: UITableView!
     @IBOutlet weak var foodNameLabel: UILabel!
+    @IBOutlet weak var foodImage: UIImageView!
     
     let sectionTitles = ["Calories", "Ingredients", "How to Cook"]
     
-    let foodsDetails = FoodDetails(foodName: "Nasi Goreng", calories: 999, type: "Lunch", ingredients: ["bawang", "nasi", "kecap"], steps: ["a", "b"])
+    let foodsDetails = FoodDetails(foodName: "Nasi Goreng", calories: 999, imageURL: "https://www.masakapahariini.com/wp-content/uploads/2019/01/nasi-goreng-jawa-620x440.jpg",type: "Lunch", ingredients: ["bawang", "nasi", "kecap"], steps: ["a", "b"])
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +24,9 @@ class RecipeDetailVC: UIViewController {
         recipeTable.delegate = self
         recipeTable.dataSource = self
         // Do any additional setup after loading the view.
+        let url = URL(string: "\(foodsDetails.imageURL)")
+        let data = try? Data(contentsOf: url!)
+        foodImage.image = UIImage(data: data!)
     }
     
     /*
