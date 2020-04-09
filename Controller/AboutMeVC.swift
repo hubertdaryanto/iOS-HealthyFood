@@ -75,13 +75,24 @@ class AboutMeVC: UIViewController {
         let height = heightTextField.text
         let weight = weightTextField.text
         
+        let weightDouble = (weight! as NSString).doubleValue
+       let heightDouble = (height! as NSString).doubleValue
+        
         let defaults = UserDefaults.standard
         defaults.set(plan, forKey: "plan")
         defaults.set(name, forKey: "name")
         defaults.set(height, forKey: "height")
         defaults.set(weight, forKey: "weight")
         
+        let bmi = calcBMI(weight: weightDouble, height: heightDouble / 100.0)
+        defaults.set(bmi, forKey: "bmi")
+        
         performSegue(withIdentifier: "toPlanWeightVC", sender: self)
+    }
+    
+    func calcBMI(weight: Double, height: Double) -> Double {
+        let bmiValue = weight / pow(height, 2)
+        return bmiValue
     }
     
     func showInputAlert(x: Int, pos: Int){

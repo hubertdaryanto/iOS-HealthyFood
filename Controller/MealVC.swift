@@ -19,17 +19,13 @@ class MealVC: UIViewController {
     @IBOutlet weak var breakfastSign: UIView!
     @IBOutlet weak var lunchSign: UIView!
     @IBOutlet weak var dinnerSign: UIView!
+    @IBOutlet weak var helloLabel: UILabel!
+    
+    var name: String!
     
     var meals = [Meal]()
     var type = "Breakfast"
     var mealCount = 0
-    
-    func makeRoundViewCorners() {
-        let signs: Any = [breakfastSign, lunchSign, dinnerSign]
-        let mealImages: Any = [breakfastMeal, lunchMeal, dinnerMeal]
-        applyRoundedCorner(signs as! [AnyObject], value: 10.0)
-        applyRoundedCorner(mealImages as! [AnyObject] , value: 20.0)
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,17 +35,15 @@ class MealVC: UIViewController {
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
         
-        makeRoundViewCorners()
-        
-        let timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true, block: { timer in
-            self.signByTime()
-        })
-        
-        timer.fire()
-        breakfastMeal.image = UIImage(named: meals[0].image)
-        lunchMeal.image = UIImage(named: meals[1].image)
-        dinnerMeal.image = UIImage(named: meals[2].image)
+        setupUI()
     }
+    
+    func makeRoundViewCorners() {
+       let signs: Any = [breakfastSign, lunchSign, dinnerSign]
+       let mealImages: Any = [breakfastMeal, lunchMeal, dinnerMeal]
+       applyRoundedCorner(signs as! [AnyObject], value: 10.0)
+       applyRoundedCorner(mealImages as! [AnyObject] , value: 20.0)
+   }
     
     @IBAction func typeSegmentPressed(_ sender: Any) {
         meals = Meal.fetchMeals()
@@ -102,6 +96,22 @@ class MealVC: UIViewController {
         } else if hour >= 17 && hour <= 23 {
             dinnerSign.alpha = 1.0
         }
+    }
+    
+    func setupUI() {
+        makeRoundViewCorners()
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true, block: { timer in
+            self.signByTime()
+        })
+        
+        timer.fire()
+        
+        helloLabel.text = "Hello, " + name
+        
+        breakfastMeal.image = UIImage(named: meals[0].image)
+        lunchMeal.image = UIImage(named: meals[1].image)
+        dinnerMeal.image = UIImage(named: meals[2].image)
     }
     
     /*
