@@ -21,7 +21,7 @@ class MealVC: UIViewController {
     @IBOutlet weak var dinnerSign: UIView!
     @IBOutlet weak var helloLabel: UILabel!
     
-    var name: String!
+    var name: String?
     
     var meals = [Meal]()
     var type = "Breakfast"
@@ -107,7 +107,9 @@ class MealVC: UIViewController {
         
         timer.fire()
         
-        helloLabel.text = "Hello, " + name
+        let myName = name ?? "Siri"
+        
+        helloLabel.text = "Hello, " + myName
         
         breakfastMeal.image = UIImage(named: meals[0].image)
         lunchMeal.image = UIImage(named: meals[1].image)
