@@ -14,7 +14,8 @@ class AboutMeVC: UIViewController {
     @IBOutlet weak var aboutView: UIView!
     @IBOutlet weak var heightTextField: UITextField!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var genderPickerView: UIPickerView!
+    @IBOutlet weak var genderTextField: UITextField!
+    
     @IBOutlet weak var gainWeightBtn: UIButton!
     @IBOutlet weak var maintainWeightBtn: UIButton!
     @IBOutlet weak var loseWeightBtn: UIButton!
@@ -22,22 +23,96 @@ class AboutMeVC: UIViewController {
     var selectedGender : String? = ""
     let genders = ["Male","Female"]
     
+    var genderPickerView: UIPickerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        genderPickerView.delegate = self
-        genderPickerView.dataSource = self
         
         let objects: Any = [gainWeightBtn,maintainWeightBtn, loseWeightBtn, aboutView]
         applyRoundedCorner(objects as! [AnyObject])
         
-        let textFields: Any = [nameTextField, heightTextField, weightTextField]
+        let textFields: Any = [nameTextField, heightTextField, weightTextField, genderTextField]
         applyUnderline(textFields as! [UITextField])
         
-        genderPickerView.reloadAllComponents()
+        self.genderTextField.delegate = self
+        heightTextField.keyboardType = .asciiCapableNumberPad
+        weightTextField.keyboardType = .asciiCapableNumberPad
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+
+        tap.cancelsTouchesInView = false
+        self.hideKeyboardWhenTappedAround()
+
+        view.addGestureRecognizer(tap)
+        
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+//
+//        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+//        genderPickerView.reloadAllComponents()
     }
     
-    @IBAction func planDidPressed(_ sender: Any) {
+    @IBAction func planDidPressed(_ sender: UIButton) {
+        var plan = ""
+        
+        if sender == gainWeightBtn {
+            plan = "Gain Weight"
+        } else if sender == maintainWeightBtn {
+            plan = "Maintain Weight"
+        } else if sender == loseWeightBtn {
+            plan = "Lose Weight"
+        }
+        
+        let textFields: [UITextField] = [nameTextField, genderTextField, heightTextField, weightTextField] as! [UITextField]
+        
+        for i in 0 ..< 4 {
+            if validateInput(x: textFields[i].text, y: i) {
+                textFields[i].resignFirstResponder()
+            }
+        }
+        
+        let name = nameTextField.text
+        let height = heightTextField.text
+        let weight = weightTextField.text
+        
+        let defaults = UserDefaults.standard
+        defaults.set(plan, forKey: "plan")
+        defaults.set(name, forKey: "name")
+        defaults.set(height, forKey: "height")
+        defaults.set(weight, forKey: "weight")
+        
+        performSegue(withIdentifier: "toPlanWeightVC", sender: self)
+    }
+    
+    func showInputAlert(x: Int, pos: Int){
+        let alerts = ["must not be empty", "must be number", "must greater than zero"]
+        let fields = ["Name", "Gender", "Height", "Weight"]
+        
+        let alert = UIAlertController(title: "Warning", message: "\(fields[pos]) field \(alerts[x])", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .cancel, handler: nil)
+        alert.addAction(action)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func validateInput(x : String?, y: Int) -> Bool {
+        var flag: Bool = false
+        
+        if x == nil || x == "" {
+            showInputAlert(x: 0, pos: y)
+        }
+        else if y >= 2 {
+            if !x!.isDouble {
+                showInputAlert(x: 1, pos: y)
+            }
+            else if Double(x!)! < 0 {
+                showInputAlert(x: 2, pos: y)
+            }
+        }
+        else {
+            flag = true
+        }
+        
+        return flag
     }
     
     func applyRoundedCorner(_ objects: [AnyObject]){
@@ -52,16 +127,36 @@ class AboutMeVC: UIViewController {
         }
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0 {
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
     }
-    */
 
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if self.view.frame.origin.y != 0 {
+            self.view.frame.origin.y = 0
+        }
+    }
+    
+    
+    //MARK: - Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let planWeightVC = segue.destination as? PlanWeightVC else { return }
+        
+        planWeightVC.weight = UserDefaults.standard.string(forKey: "weight")
+        planWeightVC.height = UserDefaults.standard.string(forKey: "height")
+        planWeightVC.plan = UserDefaults.standard.string(forKey: "plan")
+    }
+}
+
+extension String {
+    var isDouble: Bool {
+        return Double(self) != nil
+    }
 }
 
 extension UITextField {
@@ -73,6 +168,43 @@ extension UITextField {
         border.borderWidth = width
         self.layer.addSublayer(border)
         self.layer.masksToBounds = true
+    }
+}
+
+extension AboutMeVC: UITextFieldDelegate {
+    func pickUp(_ textField : UITextField){
+
+        // UIPickerView
+        self.genderPickerView = UIPickerView(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 216))
+        self.genderPickerView.delegate = self
+        self.genderPickerView.dataSource = self
+        self.genderPickerView.backgroundColor = UIColor.white
+        textField.inputView = self.genderPickerView
+
+        let toolBar = UIToolbar()
+        toolBar.barStyle = .default
+        toolBar.isTranslucent = true
+        toolBar.tintColor = UIColor(red: 92/255, green: 216/255, blue: 255/255, alpha: 1)
+        toolBar.sizeToFit()
+
+        let doneButton = UIBarButtonItem(title: "Done", style: .plain, target: self, action: #selector(AboutMeVC.doneClick))
+        let spaceButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let cancelButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(AboutMeVC.cancelClick))
+        toolBar.setItems([cancelButton, spaceButton, doneButton], animated: false)
+        toolBar.isUserInteractionEnabled = true
+        textField.inputAccessoryView = toolBar
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.pickUp(genderTextField)
+    }
+    
+    @objc func doneClick() {
+        genderTextField.resignFirstResponder()
+    }
+   
+   @objc func cancelClick() {
+        genderTextField.resignFirstResponder()
     }
 }
 
@@ -90,11 +222,25 @@ extension AboutMeVC: UIPickerViewDelegate, UIPickerViewDataSource {
        }
        
    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-       selectedGender = genders[row]
+//        selectedGender = genders[row]
+        genderTextField.text = genders[row]
+            
    }
    
    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
        return NSAttributedString(string: genders[row], attributes: [NSAttributedString.Key.foregroundColor: #colorLiteral(red: 0.2549019754, green: 0.2745098174, blue: 0.3019607961, alpha: 1)])
    }
     
+}
+
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
 }
