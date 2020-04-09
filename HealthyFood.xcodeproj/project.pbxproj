@@ -106,8 +106,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		284EB369243D84B1007DF561 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = RecipeDetails.swift; path = ../Controller/RecipeDetails.swift; sourceTree = "<group>"; };
+<<<<<<<<< Temporary merge branch 1
+		284EB369243D84B1007DF561 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
+=========
+
+
+		284EB369243D84B1007DF561 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		D1191F6E243E12940070CB1B /* PlanWeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanWeightVC.swift; sourceTree = "<group>"; };
+		284EB369243D84B1007DF561 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		D13B2D42243849FB004CE335 /* SF-Compact-Text-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-Ultralight.otf"; path = "../../../../../../../Library/Fonts/SF-Compact-Text-Ultralight.otf"; sourceTree = "<group>"; };
 		D13B2D43243849FB004CE335 /* SF-Compact-Text-HeavyItalic.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-HeavyItalic.otf"; path = "../../../../../../../Library/Fonts/SF-Compact-Text-HeavyItalic.otf"; sourceTree = "<group>"; };
 		D13B2D44243849FB004CE335 /* SF-Compact-Rounded-Semibold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Rounded-Semibold.otf"; path = "../../../../../../../Library/Fonts/SF-Compact-Rounded-Semibold.otf"; sourceTree = "<group>"; };
