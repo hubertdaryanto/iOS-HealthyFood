@@ -46,6 +46,9 @@
                                 <state key="normal" title="Proceed">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <segue destination="kO3-fC-fjI" kind="presentation" modalPresentationStyle="fullScreen" id="uJQ-Kd-wVP"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text=" Hello!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Fk-Xz-gvc">
                                 <rect key="frame" x="33" y="130" width="141" height="56"/>
@@ -187,6 +190,7 @@
                         <color key="backgroundColor" red="0.27843137254901962" green="0.70196078431372544" blue="0.61568627450980395" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="ylc-Ix-fbI"/>
                     </view>
+                    <navigationItem key="navigationItem" id="Ay5-Xd-arn"/>
                     <connections>
                         <outlet property="aboutView" destination="NYg-kz-y8g" id="1Nj-PX-A1s"/>
                         <outlet property="gainWeightBtn" destination="Ybm-lb-BLm" id="wH9-55-nAf"/>
@@ -291,6 +295,7 @@
                                 </state>
                                 <connections>
                                     <action selector="planDidPressed:" destination="kO3-fC-fjI" eventType="touchUpInside" id="gz4-2b-ALz"/>
+                                    <segue destination="kO3-fC-fjI" kind="presentation" modalPresentationStyle="fullScreen" id="0si-vb-xPZ"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="In a month to reach target" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="USF-2h-pVc">
@@ -731,4 +736,7 @@
         <image name="illustration" width="375" height="267"/>
         <image name="person.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="0si-vb-xPZ"/>
+    </inferredMetricsTieBreakers>
 </document>
