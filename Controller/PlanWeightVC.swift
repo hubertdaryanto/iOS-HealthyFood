@@ -17,6 +17,8 @@ class PlanWeightVC: UIViewController {
     @IBOutlet weak var weightTargetTextField: UITextField!
     @IBOutlet weak var weightTargetOkBtn: UIButton!
     @IBOutlet weak var planNameLabel: UILabel!
+    @IBOutlet weak var inMonthLabel: UILabel!
+    @IBOutlet weak var weightTargetLabel: UILabel!
     
     var weight: String!
     var height: String!
@@ -27,11 +29,8 @@ class PlanWeightVC: UIViewController {
         
         currWeightLabel.text = weight
         planNameLabel.text = plan
-        weightTargetTextField.keyboardType = .asciiCapableNumberPad
-        weightTargetTextField.underlined()
-        getStartedBtn.layer.cornerRadius = 10
-        weightTargetOkBtn.layer.cornerRadius = 10
         
+        setupUIs()
 //        let bmi = calcBMI(height: Double(height!)!, weight: Double(weight!)!)
     }
     
@@ -48,6 +47,11 @@ class PlanWeightVC: UIViewController {
         } else if plan == "Maintain Weight" {
             kg = 0.0
             pos = 1
+            weightTargetLabel.isHidden = true
+            weightTargetTextField.isHidden = true
+            weightTargetOkBtn.isHidden = true
+            planKgLabel.isHidden = true
+            inMonthLabel.isHidden = true
         } else if plan == "Gain Weight" {
             kg = (Double(target)! - Double(weight)!) / 30.0
             pos = 2
@@ -62,6 +66,19 @@ class PlanWeightVC: UIViewController {
 //        defaults.set(bmi, forKey: "bmi")
         let bmiValue = weight / pow(height, 2)
         return bmiValue
+    }
+    
+    func setupUIs(){
+        weightTargetLabel.isHidden = false
+        weightTargetTextField.isHidden = false
+        weightTargetOkBtn.isHidden = false
+        planKgLabel.isHidden = false
+        inMonthLabel.isHidden = false
+        
+        weightTargetTextField.keyboardType = .asciiCapableNumberPad
+        weightTargetTextField.underlined()
+        getStartedBtn.layer.cornerRadius = 10
+        weightTargetOkBtn.layer.cornerRadius = 10
     }
 
     /*

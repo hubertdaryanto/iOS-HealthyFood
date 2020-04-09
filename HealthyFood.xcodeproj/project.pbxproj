@@ -106,9 +106,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-<<<<<<<<< Temporary merge branch 1
 		284EB369243D84B1007DF561 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
-=========
 
 
 		D1191F6E243E12940070CB1B /* PlanWeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanWeightVC.swift; sourceTree = "<group>"; };
