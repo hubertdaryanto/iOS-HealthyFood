@@ -20,6 +20,10 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var bmiLabel: UILabel!
     @IBOutlet weak var calorieLeftLabel: UILabel!
     @IBOutlet weak var kcalBGView: UIView!
+    @IBOutlet weak var nameLabel: UILabel!
+    
+    let calories: Int = 3000
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +31,21 @@ class ProfileVC: UIViewController {
         
         let objects: Any = [bmiView, heightView, weightView, updateWeightBtn, planBtn]
         applyRoundedCorner(objects as! [AnyObject])
+        
+        let defaults = UserDefaults.standard
+        let name = defaults.string(forKey: "name")
+        let height = defaults.string(forKey: "height")
+        let weight = defaults.string(forKey: "weight")
+        let gender = defaults.string(forKey: "gender")
+        let bmi = defaults.string(forKey: "bmi")
+        
+        nameLabel.text = "Hello, " + name!
+        planBtn.setTitle(defaults.string(forKey: "plan"), for: .normal)
+        heightLabel.text = height
+        weightLabel.text = weight
+        
+        bmiLabel.text = String(format: "%.1f", (bmi! as NSString).doubleValue)
+        calorieLeftLabel.text = gender == "Male" ? "\(calories)" : "\(calories - 1000)"
     }
     
     func applyRoundedCorner(_ objects: [AnyObject]){
