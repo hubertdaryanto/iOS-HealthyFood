@@ -31,7 +31,6 @@ class PlanWeightVC: UIViewController {
         planNameLabel.text = plan
         
         setupUIs()
-//        let bmi = calcBMI(height: Double(height!)!, weight: Double(weight!)!)
     }
     
     @IBAction func weightTargetOkDidPressed(_ sender: Any) {
@@ -62,12 +61,6 @@ class PlanWeightVC: UIViewController {
         planKgLabel.text = "\(plans[pos]) \(kgDecimal) kg/day"
     }
     
-    func calcBMI(height: Double, weight: Double) -> Double {
-//        defaults.set(bmi, forKey: "bmi")
-        let bmiValue = weight / pow(height, 2)
-        return bmiValue
-    }
-    
     func setupUIs(){
         weightTargetLabel.isHidden = false
         weightTargetTextField.isHidden = false
@@ -81,14 +74,15 @@ class PlanWeightVC: UIViewController {
         weightTargetOkBtn.layer.cornerRadius = 10
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        if segue.identifier == "toMealVC" {
+            let mealVC = segue.destination as! MealVC
+            mealVC.name = UserDefaults.standard.string(forKey: "name")
+        }
     }
-    */
 
 }
