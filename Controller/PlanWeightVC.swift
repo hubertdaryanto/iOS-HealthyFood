@@ -87,6 +87,7 @@ class PlanWeightVC: UIViewController {
             
             if weight >= target {
                 showInputAlert(x: 1, y: 0)
+                weightTargetTextField.text = String(format: "%.0f", weight)
             } else if target > weight+4 {
                 showInputAlert(x: 2, y: 0)
                 weightTargetTextField.text = String(format: "%.0f", weight + 4.0)
@@ -97,6 +98,7 @@ class PlanWeightVC: UIViewController {
             
             if weight <= target {
                 showInputAlert(x: 1, y: 1)
+                weightTargetTextField.text = String(format: "%.0f", weight)
             } else if target < weight-4 {
                 showInputAlert(x: 2, y: 1)
                 weightTargetTextField.text = String(format: "%.0f", weight - 4.0)

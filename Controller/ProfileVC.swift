@@ -21,7 +21,8 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var calorieLeftLabel: UILabel!
     @IBOutlet weak var kcalBGView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
-    
+    var updateWeightTextField: UITextField!
+
     let calories: Int = 3000
     
     override func viewDidLoad() {
@@ -54,7 +55,57 @@ class ProfileVC: UIViewController {
         }
     }
     
+    func showInputAlert() {
+        let dialogMessage = UIAlertController(title: "Update Weight", message: nil, preferredStyle: .alert)
+        let messagelabel = UILabel(frame: CGRect(x: 0, y: 40, width: 270, height:15))
+        messagelabel.textAlignment = .center
+        messagelabel.textColor = .red
+        messagelabel.font = messagelabel.font.withSize(12)
+        dialogMessage.view.addSubview(messagelabel)
+        messagelabel.isHidden = true
+
+        let create = UIAlertAction(title: "Update", style: .default, handler: { (action) -> Void in
+            if let weightInput = self.updateWeightTextField!.text {
+                messagelabel.text = ""
+                messagelabel.isHidden = false
+                if weightInput == "" {
+                    messagelabel.text = "Please enter weight"
+                }
+                else if (weightInput as NSString).doubleValue < 0 {
+                    messagelabel.text = "must greater than zero"
+                }
+                else if (weightInput as NSString).doubleValue <= 20 {
+                    messagelabel.text = "must greater than 20 kg"
+                }
+                
+                if messagelabel.text != "" {
+                    self.present(dialogMessage, animated: true, completion: nil)
+                } else {
+                    UserDefaults.standard.set(weightInput, forKey: "weight")
+                    UserDefaults.standard.synchronize()
+                    self.weightLabel.text = weightInput
+                }
+
+            }
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .default) { (action) -> Void in
+            print("Cancel button tapped")
+        }
+
+        dialogMessage.addAction(cancel)
+        dialogMessage.addAction(create)
+        
+        dialogMessage.addTextField { (textField) -> Void in
+            self.updateWeightTextField = textField
+            self.updateWeightTextField?.placeholder = "Please enter weight"
+        }
+
+        self.present(dialogMessage, animated: true, completion: nil)
+    }
+    
     @IBAction func updateWeightBtn(_ sender: Any) {
+        showInputAlert()
     }
     
     /*
