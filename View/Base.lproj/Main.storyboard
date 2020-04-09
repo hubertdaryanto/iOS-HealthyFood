@@ -284,6 +284,7 @@
                                 </state>
                                 <connections>
                                     <action selector="planDidPressed:" destination="kO3-fC-fjI" eventType="touchUpInside" id="Xbw-1a-jTL"/>
+                                    <segue destination="edW-Jb-5X0" kind="presentation" identifier="toMealVC" modalPresentationStyle="fullScreen" id="z5s-1F-5Cj"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9kM-yS-yT6">
@@ -340,7 +341,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello, Budi!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HsH-Sr-W5S">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello, Siri!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HsH-Sr-W5S">
                                 <rect key="frame" x="20" y="60" width="211" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="26"/>
@@ -353,6 +354,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="person.circle.fill" catalog="system"/>
+                                <connections>
+                                    <segue destination="qkU-N5-gOH" kind="presentation" modalPresentationStyle="fullScreen" id="s3r-YW-FhX"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your meal :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8y-c0-zDA">
                                 <rect key="frame" x="20" y="124" width="128" height="34"/>
@@ -477,6 +481,7 @@
                         <outlet property="breakfastSign" destination="LLf-P5-91G" id="M1Q-S0-HHO"/>
                         <outlet property="dinnerMeal" destination="vCm-gN-ps8" id="wsh-nP-Gtx"/>
                         <outlet property="dinnerSign" destination="XeD-9g-nlN" id="yE1-DS-G5E"/>
+                        <outlet property="helloLabel" destination="HsH-Sr-W5S" id="EaW-k6-M9r"/>
                         <outlet property="lunchMeal" destination="Wz8-xs-jFS" id="U3O-OE-PGd"/>
                         <outlet property="lunchSign" destination="def-pp-BF4" id="Gwx-GE-Cmf"/>
                         <outlet property="mealCollectionView" destination="2By-zK-hd9" id="vTx-Qc-r6o"/>
@@ -554,7 +559,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello, Budi!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLc-s2-z4T">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hello, Siri!" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VLc-s2-z4T">
                                 <rect key="frame" x="20" y="65" width="211" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="SFProText-Bold" family="SF Pro Text" pointSize="26"/>
@@ -726,6 +731,7 @@
                         <outlet property="heightLabel" destination="DEA-UY-wMR" id="PuA-cF-Zhq"/>
                         <outlet property="heightView" destination="ibD-cj-YOF" id="0NT-Da-MmY"/>
                         <outlet property="kcalBGView" destination="O96-fE-xAa" id="Isc-Av-GSQ"/>
+                        <outlet property="nameLabel" destination="VLc-s2-z4T" id="hwN-FL-TrO"/>
                         <outlet property="planBtn" destination="ChD-KL-W5w" id="7fc-r5-ndo"/>
                         <outlet property="updateWeightBtn" destination="qjx-sF-fM4" id="8ej-3x-rTV"/>
                         <outlet property="weightLabel" destination="0HS-8Z-fLC" id="0M7-LI-Hbg"/>
