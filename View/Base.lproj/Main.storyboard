@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -320,8 +320,10 @@
                     <connections>
                         <outlet property="currWeightLabel" destination="K5m-cw-Ifz" id="SC9-a3-eD4"/>
                         <outlet property="getStartedBtn" destination="V0B-xx-Rcd" id="W1W-Z2-5Jl"/>
+                        <outlet property="inMonthLabel" destination="USF-2h-pVc" id="Pg1-4b-QBj"/>
                         <outlet property="planKgLabel" destination="Qap-ym-jHs" id="jnl-mg-OY5"/>
                         <outlet property="planNameLabel" destination="Ry3-zI-7uh" id="wpK-dt-Qkc"/>
+                        <outlet property="weightTargetLabel" destination="HTu-Om-Hdv" id="68c-Es-lGE"/>
                         <outlet property="weightTargetOkBtn" destination="XpH-m8-48F" id="DWG-7m-cAA"/>
                         <outlet property="weightTargetTextField" destination="WEs-LN-9Su" id="le3-7e-w5U"/>
                     </connections>
@@ -520,7 +522,7 @@
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="C8d-Ts-e8m">
-                                        <rect key="frame" x="0.0" y="72" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="82" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="C8d-Ts-e8m" id="DJc-cE-9Ce">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -528,7 +530,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="KaN-r7-U8C">
-                                        <rect key="frame" x="0.0" y="116" width="414" height="44"/>
+                                        <rect key="frame" x="0.0" y="126" width="414" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KaN-r7-U8C" id="Ktd-2P-e8F">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
@@ -744,7 +746,7 @@
     </scenes>
     <resources>
         <image name="illustration" width="375" height="267"/>
-        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
+        <image name="person.circle.fill" catalog="system" width="64" height="60"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0si-vb-xPZ"/>
