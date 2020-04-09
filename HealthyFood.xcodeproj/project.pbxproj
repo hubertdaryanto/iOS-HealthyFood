@@ -106,6 +106,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+<<<<<<<<< Temporary merge branch 1
+		284EB369243D84B1007DF561 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
+=========
+
+
+		284EB369243D84B1007DF561 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		D1191F6E243E12940070CB1B /* PlanWeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanWeightVC.swift; sourceTree = "<group>"; };
 		284EB369243D84B1007DF561 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		D13B2D42243849FB004CE335 /* SF-Compact-Text-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-Ultralight.otf"; path = "../../../../../../../Library/Fonts/SF-Compact-Text-Ultralight.otf"; sourceTree = "<group>"; };
@@ -312,7 +318,6 @@
 				D13B2DEA24385DE2004CE335 /* RecipeDetailVC.swift */,
 				D13B2DEC24385DF9004CE335 /* ProfileVC.swift */,
 				D13B2DF224385F8B004CE335 /* OnBoardVC.swift */,
-				284EB369243D84B1007DF561 /* RecipeDetails.swift */,
 				D1DA2B10243C58F700064558 /* MealCell.swift */,
 				D1DA2B12243C5AD300064558 /* MealVC.swift */,
 				D1191F6E243E12940070CB1B /* PlanWeightVC.swift */,
@@ -331,9 +336,9 @@
 		D13B2DEF24385E13004CE335 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				284EB369243D84B1007DF561 /* RecipeDetails.swift */,
 				D1DA2B0C243C372400064558 /* Meal.swift */,
 				D148E266243CDDFB0097CC2B /* MealData.swift */,
-				284EB369243D84B1007DF561 /* RecipeDetails.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
