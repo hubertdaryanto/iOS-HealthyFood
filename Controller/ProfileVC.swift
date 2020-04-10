@@ -26,6 +26,7 @@ class ProfileVC: UIViewController {
 
     let calories: Int = 3000
     var flag: Int = 0
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +36,6 @@ class ProfileVC: UIViewController {
         let objects: Any = [bmiView, heightView, weightView, updateWeightBtn, planBtn]
         applyRoundedCorner(objects as! [AnyObject])
         
-        let defaults = UserDefaults.standard
         let name = defaults.string(forKey: "name")
         let height = defaults.string(forKey: "height")
         let target = defaults.string(forKey: "target")
@@ -47,14 +47,7 @@ class ProfileVC: UIViewController {
         nameLabel.text = "Hello, " + name!
         planLabel.text = plan! + " Plan"
         
-        var btnTitle = ""
-        if plan == "Gain Weight" {
-            btnTitle = String(format: "%.0f kg / Month", (target! as NSString).doubleValue - (weight! as NSString).doubleValue)
-        } else if plan == "Lose Weight" {
-            btnTitle = String(format: "%.0f kg / Month", (weight! as NSString).doubleValue - (target! as NSString).doubleValue)
-        }
-        
-        planBtn.setTitle(btnTitle, for: .normal)
+        planBtn.setTitle(String(format: "%.0f kg / Month", abs((target! as NSString).doubleValue - (weight! as NSString).doubleValue)), for: .normal)
         
         heightLabel.text = height
         weightLabel.text = weight
@@ -62,31 +55,19 @@ class ProfileVC: UIViewController {
         bmiLabel.text = String(format: "%.1f", (bmi! as NSString).doubleValue)
         calorieLeftLabel.text = gender == "Male" ? "\(calories)" : "\(calories - 1000)"
     }
+    
+    fileprivate func formBtnTitle(_ kg: Double) -> String {
+        flag = flag == 0 ? 1 : 0
+        return flag == 1 ? String(format: "%.2f kg / Day", (kg / 30.0)) : String(format: "%.0f kg / Month", kg)
+    }
+    
     @IBAction func planBtnDidPressed(_ sender: Any) {
         let defaults = UserDefaults.standard
         let target = defaults.string(forKey: "target")
-        let plan = defaults.string(forKey: "plan")
         let weight = defaults.string(forKey: "weight")
-        var btnTitle = ""
-        if flag == 0 {
-            if plan == "Gain Weight" {
-                let kg = (target! as NSString).doubleValue - (weight! as NSString).doubleValue
-                btnTitle = String(format: "%.2f kg / Day", (kg / 30.0))
-               } else if plan == "Lose Weight" {
-                let kg = (weight! as NSString).doubleValue - (target! as NSString).doubleValue
-                   btnTitle = String(format: "%.2f kg / Day", (kg / 30.0))
-               }
-            flag = 1
-        } else {
-            if plan == "Gain Weight" {
-                btnTitle = String(format: "%.0f kg / Month", (target! as NSString).doubleValue - (weight! as NSString).doubleValue)
-            } else if plan == "Lose Weight" {
-                btnTitle = String(format: "%.0f kg / Month", (weight! as NSString).doubleValue - (target! as NSString).doubleValue)
-            }
-            flag = 0
-        }
+        let kg = abs((target! as NSString).doubleValue - (weight! as NSString).doubleValue)
         
-        planBtn.setTitle(btnTitle, for: .normal)
+        planBtn.setTitle(formBtnTitle(kg), for: .normal)
     }
     
     func applyRoundedCorner(_ objects: [AnyObject]){
@@ -108,15 +89,8 @@ class ProfileVC: UIViewController {
             if let weightInput = self.updateWeightTextField!.text {
                 messagelabel.text = ""
                 messagelabel.isHidden = false
-                if weightInput == "" {
-                    messagelabel.text = "Please enter weight"
-                }
-                else if (weightInput as NSString).doubleValue < 0 {
-                    messagelabel.text = "must greater than zero"
-                }
-                else if (weightInput as NSString).doubleValue <= 20 {
-                    messagelabel.text = "must greater than 20 kg"
-                }
+                
+                messagelabel.text = weightInput == "" ? "Please enter weight" : (weightInput as NSString).doubleValue < 0 ? "must greater than zero" : (weightInput as NSString).doubleValue <= 20 ? "must greater than 20 kg" : ""
                 
                 if messagelabel.text != "" {
                     self.present(dialogMessage, animated: true, completion: nil)
@@ -129,9 +103,7 @@ class ProfileVC: UIViewController {
             }
         })
         
-        let cancel = UIAlertAction(title: "Cancel", style: .default) { (action) -> Void in
-            print("Cancel button tapped")
-        }
+        let cancel = UIAlertAction(title: "Cancel", style: .default)
 
         dialogMessage.addAction(cancel)
         dialogMessage.addAction(create)

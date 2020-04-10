@@ -65,17 +65,6 @@ class MealVC: UIViewController {
         
         meals = a
         mealCollectionView.reloadData()
-
-    
-//        meals = Meal.fetchMeals()
-//
-//        for x in 0 ..< mealCount {
-//            if meals[x].type != type {
-//                meals.remove(at: x)
-//            }
-//        }
-//
-//        mealCollectionView.reloadData()
     }
     
     func applyRoundedCorner(_ objects: [AnyObject], value: CGFloat){

@@ -57,7 +57,7 @@ class PlanWeightVC: UIViewController {
             inMonthLabel.isHidden = true
         }
         
-        let kgDecimal = String(format: "%.2f", validateTarget(weight: Double(weight)!, targetParam: Double(target)!, pos: pos))
+        let kgDecimal = String(format: "%.2f", getPlan(weight: Double(weight)!, targetParam: Double(target)!, pos: pos))
         
         planKgLabel.text = "\(plans[pos]) \(kgDecimal) kg/day"
     }
@@ -79,7 +79,7 @@ class PlanWeightVC: UIViewController {
         _ = validateInput(x: weightTargetTextField.text)
     }
     
-    func validateTarget(weight: Double, targetParam: Double, pos: Int) -> Double {
+    func getPlan(weight: Double, targetParam: Double, pos: Int) -> Double {
         var kg = -1.0
         
         if pos == 0 { //gain
