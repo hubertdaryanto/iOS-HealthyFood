@@ -13,6 +13,7 @@ class RecipeDetailVC: UIViewController {
     @IBOutlet var recipeTable: UITableView!
     @IBOutlet weak var foodNameLabel: UILabel!
     @IBOutlet weak var foodImage: UIImageView!
+    @IBOutlet weak var addToMyMealButton: UIButton!
     
     let sectionTitles = ["Calories", "Ingredients", "How to Cook"]
     var meal: Meal!
@@ -29,6 +30,11 @@ class RecipeDetailVC: UIViewController {
         let url = URL(string: "\(meal.image)")
         let data = try? Data(contentsOf: url!)
         foodImage.image = UIImage(data: data!)
+        
+        //edit add to my meal button
+        //addToMyMealButton.layer.borderColor = UIColor.white.cgColor
+        //addToMyMealButton.layer.borderWidth = 5
+        addToMyMealButton.layer.cornerRadius = 16
     }
     
     /*

@@ -539,11 +539,21 @@
                                 </prototypes>
                                 <sections/>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kZf-Bg-fTu">
+                                <rect key="frame" x="263" y="196" width="151" height="54"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.92156862750000001" green="0.41960784309999999" blue="0.33725490200000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="Add to My Meal">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="1eM-47-JPW"/>
                     </view>
                     <connections>
+                        <outlet property="addToMyMealButton" destination="kZf-Bg-fTu" id="fGi-sE-txQ"/>
                         <outlet property="foodImage" destination="C4O-jF-DpF" id="4uC-1J-1IW"/>
                         <outlet property="foodNameLabel" destination="f4Q-nC-O0n" id="ccM-cK-V8S"/>
                         <outlet property="recipeTable" destination="b9m-r5-LEf" id="sM4-bm-nKE"/>
