@@ -20,8 +20,8 @@ class AboutMeVC: UIViewController {
     @IBOutlet weak var maintainWeightBtn: UIButton!
     @IBOutlet weak var loseWeightBtn: UIButton!
     
-    var selectedGender : String? = ""
     let genders = ["Male","Female"]
+    var pos: Int!
     
     var genderPickerView: UIPickerView!
     
@@ -44,6 +44,11 @@ class AboutMeVC: UIViewController {
         self.hideKeyboardWhenTappedAround()
 
         view.addGestureRecognizer(tap)
+        
+        nameTextField.text = UserDefaults.standard.string(forKey: "name") ?? ""
+        genderTextField.text = UserDefaults.standard.string(forKey: "gender") ?? ""
+        heightTextField.text = UserDefaults.standard.string(forKey: "height") ?? ""
+        weightTextField.text = UserDefaults.standard.string(forKey: "weight") ?? ""
         
 //        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
 //
@@ -74,18 +79,23 @@ class AboutMeVC: UIViewController {
         let name = nameTextField.text
         let height = heightTextField.text
         let weight = weightTextField.text
+        let gender = genderTextField.text
         
         let weightDouble = (weight! as NSString).doubleValue
        let heightDouble = (height! as NSString).doubleValue
         
         let defaults = UserDefaults.standard
         defaults.set(plan, forKey: "plan")
-        defaults.set(name, forKey: "name")
+        defaults.set(name?.capitalizeFirstChar(), forKey: "name")
+        defaults.set(gender, forKey: "gender")
         defaults.set(height, forKey: "height")
         defaults.set(weight, forKey: "weight")
         
         let bmi = calcBMI(weight: weightDouble, height: heightDouble / 100.0)
         defaults.set(bmi, forKey: "bmi")
+        defaults.synchronize()
+        
+        pos = sender.tag
         
         performSegue(withIdentifier: "toPlanWeightVC", sender: self)
     }
@@ -161,6 +171,7 @@ class AboutMeVC: UIViewController {
         planWeightVC.weight = UserDefaults.standard.string(forKey: "weight")
         planWeightVC.height = UserDefaults.standard.string(forKey: "height")
         planWeightVC.plan = UserDefaults.standard.string(forKey: "plan")
+        planWeightVC.pos = pos
     }
 }
 
@@ -208,6 +219,11 @@ extension AboutMeVC: UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         self.pickUp(genderTextField)
+        if genderTextField.text == "Female" {
+            genderPickerView.selectRow(1, inComponent: 0, animated: false)
+        } else {
+            genderPickerView.selectRow(0, inComponent: 0, animated: false)
+        }
     }
     
     @objc func doneClick() {
@@ -229,13 +245,11 @@ extension AboutMeVC: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-           return genders[row]
-       }
+        return genders[row]
+    }
        
    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-//        selectedGender = genders[row]
         genderTextField.text = genders[row]
-            
    }
    
    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
@@ -253,5 +267,15 @@ extension UIViewController {
 
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+}
+
+extension String {
+    func capitalizeFirstChar() -> String {
+        return prefix(1).capitalized + dropFirst()
+    }
+
+    mutating func capitalizeFirstLetter() {
+        self = self.capitalizeFirstChar()
     }
 }
