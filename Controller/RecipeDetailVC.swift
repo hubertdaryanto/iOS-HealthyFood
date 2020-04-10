@@ -16,16 +16,18 @@ class RecipeDetailVC: UIViewController {
     @IBOutlet weak var addToMyMealButton: UIButton!
     
     let sectionTitles = ["Calories", "Ingredients", "How to Cook"]
-    
-    let foodsDetails = FoodDetails(foodName: "Nasi Goreng", calories: 999, imageURL: "https://www.masakapahariini.com/wp-content/uploads/2019/01/nasi-goreng-jawa-620x440.jpg",type: "Lunch", ingredients: ["bawang", "nasi", "kecap"], steps: ["a", "b"])
+    var meal: Meal!
+//    let foodsDetail = FoodDetails(foodName: "Nasi Goreng", calories: 999, imageURL: "https://www.masakapahariini.com/wp-content/uploads/2019/01/nasi-goreng-jawa-620x440.jpg",type: "Lunch", ingredients: ["bawang", "nasi", "kecap"], steps: ["a", "b"])
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        foodNameLabel.text = foodsDetails.foodName
+        
+        foodNameLabel.text = meal.name
+        
         recipeTable.delegate = self
         recipeTable.dataSource = self
-        // Do any additional setup after loading the view.
-        let url = URL(string: "\(foodsDetails.imageURL)")
+        
+        let url = URL(string: "\(meal.image)")
         let data = try? Data(contentsOf: url!)
         foodImage.image = UIImage(data: data!)
         
@@ -62,10 +64,10 @@ extension RecipeDetailVC: UITableViewDataSource {
             return 1
         }
         else if sectionTitles[section] == "Ingredients" {
-            return foodsDetails.ingredients.count
+            return meal.ingredients.count
         }
         else if sectionTitles[section] == "How to Cook" {
-            return foodsDetails.steps.count
+            return meal.steps.count
         }
         return 0
     }
@@ -85,13 +87,13 @@ extension RecipeDetailVC: UITableViewDataSource {
         
         switch sectionTitles[indexPath.section] {
         case "Calories":
-            cell.textLabel!.text = "\(foodsDetails.calories) kcal"
+            cell.textLabel!.text = "\(meal.calories) kcal"
         case "Ingredients":
-            cell.textLabel!.text = "\(indexPath.row + 1). \(foodsDetails.ingredients[indexPath.row])"
+            cell.textLabel!.text = "\(indexPath.row + 1). \(meal.ingredients[indexPath.row])"
         case "How to Cook":
-            cell.textLabel!.text = "\(indexPath.row + 1). \(foodsDetails.steps[indexPath.row])"
+            cell.textLabel!.text = "\(indexPath.row + 1). \(meal.steps[indexPath.row])"
         default:
-            cell.textLabel!.text = "\(foodsDetails.calories) + kcal"
+            cell.textLabel!.text = "\(meal.calories) + kcal"
         }
         
         return cell

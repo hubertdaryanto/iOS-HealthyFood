@@ -18,8 +18,8 @@ class Meal {
     var calories: Int
     var type: String
     var image: String
-    var recipes: [String]
-    var howTo: [String]
+    var ingredients: [String]
+    var steps: [String]
     
     var delegate: MealDelegate?
     
@@ -31,8 +31,8 @@ class Meal {
         self.calories = calories
         self.type = type
         self.image = image
-        self.recipes = recipes
-        self.howTo = howTo
+        self.ingredients = recipes
+        self.steps = howTo
     }
     
     /*
@@ -91,15 +91,16 @@ class Meal {
     static func fetchMeals() -> [Meal] {
         let _recipes = ["a", "b"]
         let _howTo = ["c", "d"]
+        let image = "https://www.masakapahariini.com/wp-content/uploads/2019/01/nasi-goreng-jawa-620x440.jpg"
         
         return [
-            Meal(name: "Egg Toast", calories: 123, type: "Breakfast", image: "p1", recipes: _recipes, howTo: _howTo),
-            Meal(name: "Avocado Toast", calories: 124, type: "Breakfast", image: "p2", recipes: _recipes, howTo: _howTo),
-            Meal(name: "Omellete", calories: 125, type: "Breakfast", image: "p3", recipes: _recipes, howTo: _howTo),
-            Meal(name: "Chicken Soup", calories: 126, type: "Lunch", image: "p4", recipes: _recipes, howTo: _howTo),
-            Meal(name: "Bonk Choy", calories: 127, type: "Lunch", image: "p5", recipes: _recipes, howTo: _howTo),
-            Meal(name: "Steak", calories: 128, type: "Dinner", image: "p6", recipes: _recipes, howTo: _howTo),
-            Meal(name: "Rib", calories: 129, type: "Dinner", image: "p2", recipes: _recipes, howTo: _howTo),
+            Meal(name: "Egg Toast", calories: 123, type: "Breakfast", image: image, recipes: _recipes, howTo: _howTo),
+            Meal(name: "Avocado Toast", calories: 124, type: "Breakfast", image: image, recipes: _recipes, howTo: _howTo),
+            Meal(name: "Omellete", calories: 125, type: "Breakfast", image: image, recipes: _recipes, howTo: _howTo),
+            Meal(name: "Chicken Soup", calories: 126, type: "Lunch", image: image, recipes: _recipes, howTo: _howTo),
+            Meal(name: "Bonk Choy", calories: 127, type: "Lunch", image: image, recipes: _recipes, howTo: _howTo),
+            Meal(name: "Steak", calories: 128, type: "Dinner", image: image, recipes: _recipes, howTo: _howTo),
+            Meal(name: "Rib", calories: 129, type: "Dinner", image: image, recipes: _recipes, howTo: _howTo),
         ]
     }
 }
