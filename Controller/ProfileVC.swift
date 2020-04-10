@@ -11,6 +11,7 @@ import UIKit
 class ProfileVC: UIViewController {
 
     @IBOutlet weak var bmiView: UIView!
+    @IBOutlet weak var planLabel: UILabel!
     @IBOutlet weak var planBtn: UIButton!
     @IBOutlet weak var heightView: UIView!
     @IBOutlet weak var weightView: UIView!
@@ -21,8 +22,11 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var calorieLeftLabel: UILabel!
     @IBOutlet weak var kcalBGView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
-    
+    var updateWeightTextField: UITextField!
+
     let calories: Int = 3000
+    var flag: Int = 0
+    let defaults = UserDefaults.standard
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,20 +36,38 @@ class ProfileVC: UIViewController {
         let objects: Any = [bmiView, heightView, weightView, updateWeightBtn, planBtn]
         applyRoundedCorner(objects as! [AnyObject])
         
-        let defaults = UserDefaults.standard
         let name = defaults.string(forKey: "name")
         let height = defaults.string(forKey: "height")
+        let target = defaults.string(forKey: "target")
+        let plan = defaults.string(forKey: "plan")
         let weight = defaults.string(forKey: "weight")
         let gender = defaults.string(forKey: "gender")
         let bmi = defaults.string(forKey: "bmi")
         
         nameLabel.text = "Hello, " + name!
-        planBtn.setTitle(defaults.string(forKey: "plan"), for: .normal)
+        planLabel.text = plan! + " Plan"
+        
+        planBtn.setTitle(String(format: "%.0f kg / Month", abs((target! as NSString).doubleValue - (weight! as NSString).doubleValue)), for: .normal)
+        
         heightLabel.text = height
         weightLabel.text = weight
         
         bmiLabel.text = String(format: "%.1f", (bmi! as NSString).doubleValue)
         calorieLeftLabel.text = gender == "Male" ? "\(calories)" : "\(calories - 1000)"
+    }
+    
+    fileprivate func formBtnTitle(_ kg: Double) -> String {
+        flag = flag == 0 ? 1 : 0
+        return flag == 1 ? String(format: "%.2f kg / Day", (kg / 30.0)) : String(format: "%.0f kg / Month", kg)
+    }
+    
+    @IBAction func planBtnDidPressed(_ sender: Any) {
+        let defaults = UserDefaults.standard
+        let target = defaults.string(forKey: "target")
+        let weight = defaults.string(forKey: "weight")
+        let kg = abs((target! as NSString).doubleValue - (weight! as NSString).doubleValue)
+        
+        planBtn.setTitle(formBtnTitle(kg), for: .normal)
     }
     
     func applyRoundedCorner(_ objects: [AnyObject]){
@@ -54,7 +76,48 @@ class ProfileVC: UIViewController {
         }
     }
     
+    func showInputAlert() {
+        let dialogMessage = UIAlertController(title: "Update Weight", message: nil, preferredStyle: .alert)
+        let messagelabel = UILabel(frame: CGRect(x: 0, y: 40, width: 270, height:15))
+        messagelabel.textAlignment = .center
+        messagelabel.textColor = .red
+        messagelabel.font = messagelabel.font.withSize(12)
+        dialogMessage.view.addSubview(messagelabel)
+        messagelabel.isHidden = true
+
+        let create = UIAlertAction(title: "Update", style: .default, handler: { (action) -> Void in
+            if let weightInput = self.updateWeightTextField!.text {
+                messagelabel.text = ""
+                messagelabel.isHidden = false
+                
+                messagelabel.text = weightInput == "" ? "Please enter weight" : (weightInput as NSString).doubleValue < 0 ? "must greater than zero" : (weightInput as NSString).doubleValue <= 20 ? "must greater than 20 kg" : ""
+                
+                if messagelabel.text != "" {
+                    self.present(dialogMessage, animated: true, completion: nil)
+                } else {
+                    UserDefaults.standard.set(weightInput, forKey: "weight")
+                    UserDefaults.standard.synchronize()
+                    self.weightLabel.text = weightInput
+                }
+
+            }
+        })
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .default)
+
+        dialogMessage.addAction(cancel)
+        dialogMessage.addAction(create)
+        
+        dialogMessage.addTextField { (textField) -> Void in
+            self.updateWeightTextField = textField
+            self.updateWeightTextField?.placeholder = "Please enter weight"
+        }
+
+        self.present(dialogMessage, animated: true, completion: nil)
+    }
+    
     @IBAction func updateWeightBtn(_ sender: Any) {
+        showInputAlert()
     }
     
     /*

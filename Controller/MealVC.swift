@@ -21,11 +21,12 @@ class MealVC: UIViewController {
     @IBOutlet weak var dinnerSign: UIView!
     @IBOutlet weak var helloLabel: UILabel!
     
-    var name: String!
+    var name: String?
     
     var meals = [Meal]()
     var type = "Breakfast"
     var mealCount = 0
+    var selectedMeal: Meal?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,17 +66,6 @@ class MealVC: UIViewController {
         
         meals = a
         mealCollectionView.reloadData()
-
-    
-//        meals = Meal.fetchMeals()
-//
-//        for x in 0 ..< mealCount {
-//            if meals[x].type != type {
-//                meals.remove(at: x)
-//            }
-//        }
-//
-//        mealCollectionView.reloadData()
     }
     
     func applyRoundedCorner(_ objects: [AnyObject], value: CGFloat){
@@ -107,7 +97,9 @@ class MealVC: UIViewController {
         
         timer.fire()
         
-        helloLabel.text = "Hello, " + name
+        let myName = name ?? "Siri"
+        
+        helloLabel.text = "Hello, " + myName
         
         breakfastMeal.image = UIImage(named: meals[0].image)
         lunchMeal.image = UIImage(named: meals[1].image)
@@ -177,17 +169,36 @@ extension MealVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealCell", for: indexPath) as! MealCell
         
         let meal = meals[indexPath.row]
-    
+        
         cell.meal = meal
+
+        let url = URL(string: "\(meal.image)")
+               let data = try? Data(contentsOf: url!)
+        cell.image.image = UIImage(data: data!)
     
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRecipeDetailVC" {
+            let recipeDetailVC = segue.destination as! RecipeDetailVC
+            recipeDetailVC.meal = selectedMeal
+        }
+        
+        let recipeDetailVC = RecipeDetailVC()
+        recipeDetailVC.meal = selectedMeal
     }
 }
 
 extension MealVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        
+        selectedMeal = meals[indexPath.row]
+        
+        performSegue(withIdentifier: "toRecipeDetailVC", sender: self)
     }
+    
 }
 
 extension MealVC: MealDelegate {
