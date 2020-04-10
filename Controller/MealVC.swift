@@ -26,6 +26,7 @@ class MealVC: UIViewController {
     var meals = [Meal]()
     var type = "Breakfast"
     var mealCount = 0
+    var selectedMeal: Meal?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,17 +169,36 @@ extension MealVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealCell", for: indexPath) as! MealCell
         
         let meal = meals[indexPath.row]
-    
+        
         cell.meal = meal
+
+        let url = URL(string: "\(meal.image)")
+               let data = try? Data(contentsOf: url!)
+        cell.image.image = UIImage(data: data!)
     
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRecipeDetailVC" {
+            let recipeDetailVC = segue.destination as! RecipeDetailVC
+            recipeDetailVC.meal = selectedMeal
+        }
+        
+        let recipeDetailVC = RecipeDetailVC()
+        recipeDetailVC.meal = selectedMeal
     }
 }
 
 extension MealVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        
+        selectedMeal = meals[indexPath.row]
+        
+        performSegue(withIdentifier: "toRecipeDetailVC", sender: self)
     }
+    
 }
 
 extension MealVC: MealDelegate {
