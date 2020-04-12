@@ -9,7 +9,6 @@
 import UIKit
 
 class MealVC: UIViewController {
-
     @IBOutlet weak var mealCollectionView: UICollectionView!
     @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var preferredTimeLabel: UILabel!
@@ -30,9 +29,9 @@ class MealVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         meals = Meal.fetchMeals()
-
+        print(meals.count)
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
         
@@ -46,9 +45,36 @@ class MealVC: UIViewController {
        applyRoundedCorner(mealImages as! [AnyObject] , value: 20.0)
    }
     
+//    func getUsersList(){
+//            guard let url = URL(string: "http://127.0.0.1:5000/meal/") else { return }
+//            
+//    //        rest.urlQueryParameters.add(value: "10", forKey: "page")
+//                rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
+//                    if let data = results.data {
+//                        
+//                        let decoder = JSONDecoder()
+//                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+//                        guard let meal = try? decoder.decode([NewMeal].self, from: data) else { return }
+//                        //kita coba pisahin ingredients dan steps secara manual dipisahkan dengan \n
+//                        for items in meal{
+//                            let ingredientitems = items.ingredients!.components(separatedBy: " \\n ")
+//                            let stepsitems = items.steps!.components(separatedBy: " \\n ")
+//                            self.meals.append(Meal(name: items.foodName!, calories: items.calories!, type: items.type!, image: items.imageURL!, recipes: ingredientitems, howTo: stepsitems))
+//                            
+//                        }
+//                    }
+//                    print("\n\nResponse HTTP Headers:\n")
+//                    if let response = results.response {
+//                        for (key, value) in response.headers.allValues() {
+//                            print(key, value)
+//                        }
+//                    }
+//            }
+//            }
+    
     @IBAction func typeSegmentPressed(_ sender: Any) {
         meals = Meal.fetchMeals()
-        
+        print(meals.count)
         switch typeSegmentedControl.selectedSegmentIndex {
         case 0: type = "Breakfast"; preferredTimeLabel.text = "06.00 AM - 10.00 AM"
         case 1: type = "Lunch"; preferredTimeLabel.text = "11.00 AM - 02.00 PM"
@@ -59,6 +85,7 @@ class MealVC: UIViewController {
         var a = [Meal]()
         
         for x in 0 ..< meals.count {
+            print(meals[x].type)
             if meals[x].type == type {
                 a.append(meals[x])
             }
