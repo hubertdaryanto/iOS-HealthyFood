@@ -195,8 +195,6 @@ extension UITextField {
 
 extension AboutMeVC: UITextFieldDelegate {
     func pickUp(_ textField : UITextField){
-
-        // UIPickerView
         self.genderPickerView = UIPickerView(frame:CGRect(x: 0, y: 0, width: self.view.frame.size.width, height: 216))
         self.genderPickerView.delegate = self
         self.genderPickerView.dataSource = self
