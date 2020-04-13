@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		284EB36A243D84B1007DF561 /* RecipeDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 284EB369243D84B1007DF561 /* RecipeDetails.swift */; };
 		CDE501D62441A66A0006A135 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDE501D52441A66A0006A135 /* RestManager.swift */; };
 		D1191F6F243E12940070CB1B /* PlanWeightVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1191F6E243E12940070CB1B /* PlanWeightVC.swift */; };
 		D13B2D93243849FE004CE335 /* SF-Compact-Text-Ultralight.otf in Resources */ = {isa = PBXBuildFile; fileRef = D13B2D42243849FB004CE335 /* SF-Compact-Text-Ultralight.otf */; };
@@ -108,7 +107,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		284EB369243D84B1007DF561 /* RecipeDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeDetails.swift; sourceTree = "<group>"; };
 		CDE501D52441A66A0006A135 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		D1191F6E243E12940070CB1B /* PlanWeightVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanWeightVC.swift; sourceTree = "<group>"; };
 		D13B2D42243849FB004CE335 /* SF-Compact-Text-Ultralight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "SF-Compact-Text-Ultralight.otf"; path = "../../../../../../../Library/Fonts/SF-Compact-Text-Ultralight.otf"; sourceTree = "<group>"; };
@@ -335,7 +333,6 @@
 		D13B2DEF24385E13004CE335 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				284EB369243D84B1007DF561 /* RecipeDetails.swift */,
 				D1DA2B0C243C372400064558 /* Meal.swift */,
 				D148E266243CDDFB0097CC2B /* MealData.swift */,
 				CDE501D52441A66A0006A135 /* RestManager.swift */,
@@ -532,7 +529,6 @@
 				D13B2DED24385DF9004CE335 /* ProfileVC.swift in Sources */,
 				D1DA2B11243C58F700064558 /* MealCell.swift in Sources */,
 				D13B2DEB24385DE2004CE335 /* RecipeDetailVC.swift in Sources */,
-				284EB36A243D84B1007DF561 /* RecipeDetails.swift in Sources */,
 				D1DA2B0D243C372400064558 /* Meal.swift in Sources */,
 				D1DA569D243845F100F68FCC /* AppDelegate.swift in Sources */,
 				D148E267243CDDFB0097CC2B /* MealData.swift in Sources */,
