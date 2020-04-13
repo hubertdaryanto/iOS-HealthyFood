@@ -35,9 +35,7 @@ class MealVC: UIViewController {
         super.viewDidLoad()
         type = "Breakfast"
         
-        meals = Meal.fetchMeals()
-        print(meals.count)
-        
+        meals = Meal.getData()
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
         
@@ -51,9 +49,9 @@ class MealVC: UIViewController {
        applyRoundedCorner(mealImages as! [AnyObject] , value: 20.0)
    }
     
+    
     @IBAction func typeSegmentPressed(_ sender: Any) {
-        meals = Meal.fetchMeals()
-        print(meals.count)
+        meals = Meal.getData()
         switch typeSegmentedControl.selectedSegmentIndex {
         case 0: type = "Breakfast"; preferredTimeLabel.text = "06.00 AM - 10.00 AM"
         case 1: type = "Lunch"; preferredTimeLabel.text = "11.00 AM - 02.00 PM"
