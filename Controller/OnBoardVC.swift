@@ -14,6 +14,11 @@ class OnBoardVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Meal.fetchMeals()
+        
+//        let sec = ["Breakfast", "Lunch", "Dinner"]
+//        for i in 0 ..< 3 {
+//            UserDefaults.standard.removeObject(forKey: sec[i])
+//        }
         self.proceedBtn.layer.cornerRadius = 20
     }
 }

@@ -23,7 +23,8 @@ class MealVC: UIViewController {
     
     var name: String?
     
-    var meals = [Meal]()
+    var meals = Meal.getData()
+    var temp = [Meal]()
     var type = ""
     var mealCount = 0
     var selectedMeal: Meal?
@@ -38,7 +39,7 @@ class MealVC: UIViewController {
         type = "Breakfast"
         pos = -1
         
-        meals = Meal.getData()
+        temp = Meal.getData()
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
         myMealCollectionView.delegate = self
@@ -73,7 +74,7 @@ class MealVC: UIViewController {
             }
         }
         
-        meals = a
+        temp = a//bug nya disini
         mealCollectionView.reloadData()
     }
     
@@ -128,7 +129,7 @@ extension MealVC: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.mealCollectionView {
             mealCount = 0
-            for x in meals {
+            for x in temp {
                 if x.type == type {
                     mealCount += 1
                 }
@@ -144,7 +145,7 @@ extension MealVC: UICollectionViewDataSource {
         if collectionView == self.mealCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealCell", for: indexPath) as! MealCell
             
-            let meal = meals[indexPath.row]
+            let meal = temp[indexPath.row]
             
             cell.meal = meal
 
@@ -230,12 +231,12 @@ extension MealVC: UICollectionViewDelegate {
         if collectionView == self.mealCollectionView {
             print(indexPath.row)
             
-            selectedMeal = meals[indexPath.row]
+            selectedMeal = temp[indexPath.row]
             
             performSegue(withIdentifier: "toRecipeDetailVC", sender: self)
         } else {
             print(indexPath.row)
-            selectedMeal = meals[indexPath.row]
+            selectedMeal = myMeals[indexPath.row]
             
             pos = 1
             performSegue(withIdentifier: "toRecipeDetailVC", sender: self)

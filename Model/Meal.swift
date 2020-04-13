@@ -48,7 +48,7 @@ func getUsersList(){
                        guard let meal = try? decoder.decode([NewMeal].self, from: data) else { return }
                        //kita coba pisahin ingredients dan steps secara manual dipisahkan dengan \n
                         temp.removeAll()
-                    for items in meal[16...27]{
+                    for items in meal{
                            let ingredientitems = items.ingredients!.components(separatedBy: " \\n ")
                            let stepsitems = items.steps!.components(separatedBy: " \\n ")
                         temp.append(Meal(name: items.foodName!, calories: items.calories!, type: items.type!, image: items.imageURL!, recipes: ingredientitems, howTo: stepsitems))
@@ -164,7 +164,7 @@ class Meal {
         UserDefaults.standard.set(image[0], forKey: "Breakfast")
         UserDefaults.standard.set(image[3], forKey: "Lunch")
         UserDefaults.standard.set(image[6], forKey: "Dinner")
-        
+        temp = mealfromweb
         return mealfromweb
     }
     
