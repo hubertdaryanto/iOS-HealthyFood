@@ -15,8 +15,6 @@ class MealCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        //hide or reset anything you want hereafter, for example
-        
     }
     
     var meal: Meal! {
@@ -28,7 +26,7 @@ class MealCell: UICollectionViewCell {
     func updateUI() {
         if let meal = meal {
             name.text = meal.name
-            calories.text = "\(meal.calories) kcal"
+            calories.text = "\(meal.calories) cal"
             image.image = UIImage(named: meal.image)
         } else {
             name.text = nil

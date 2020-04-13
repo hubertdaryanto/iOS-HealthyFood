@@ -17,7 +17,7 @@ class RecipeDetailVC: UIViewController {
     
     let sectionTitles = ["Calories", "Ingredients", "How to Cook"]
     var meal: Meal!
-//    let foodsDetail = FoodDetails(foodName: "Nasi Goreng", calories: 999, imageURL: "https://www.masakapahariini.com/wp-content/uploads/2019/01/nasi-goreng-jawa-620x440.jpg",type: "Lunch", ingredients: ["bawang", "nasi", "kecap"], steps: ["a", "b"])
+    var type: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,29 +31,23 @@ class RecipeDetailVC: UIViewController {
         let data = try? Data(contentsOf: url!)
         foodImage.image = UIImage(data: data!)
         
-        //edit add to my meal button
-        //addToMyMealButton.layer.borderColor = UIColor.white.cgColor
-        //addToMyMealButton.layer.borderWidth = 5
         addToMyMealButton.layer.cornerRadius = 16
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    @IBAction func addToMealBtnDidPressed(_ sender: Any) {
+        
+        UserDefaults.standard.set(meal.image, forKey: type!)
+        performSegue(withIdentifier: "toMealVC", sender: self)
     }
-    */
-
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "toMealVC" {
+//
+//        }
+//    }
 }
 
-extension RecipeDetailVC: UITableViewDelegate {
-    //untuk tap" dari cell atau kerja dari cell
-}
-
-extension RecipeDetailVC: UITableViewDataSource {
+extension RecipeDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 3
@@ -89,9 +83,9 @@ extension RecipeDetailVC: UITableViewDataSource {
         case "Calories":
             cell.textLabel!.text = "\(meal.calories) kcal"
         case "Ingredients":
-            cell.textLabel!.text = "\(indexPath.row + 1). \(meal.ingredients[indexPath.row])"
+            cell.textLabel!.text = "\(meal.ingredients[indexPath.row])"
         case "How to Cook":
-            cell.textLabel!.text = "\(indexPath.row + 1). \(meal.steps[indexPath.row])"
+            cell.textLabel!.text = "\(meal.steps[indexPath.row])"
         default:
             cell.textLabel!.text = "\(meal.calories) + kcal"
         }

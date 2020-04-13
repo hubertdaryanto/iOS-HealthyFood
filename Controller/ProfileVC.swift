@@ -97,6 +97,12 @@ class ProfileVC: UIViewController {
                 } else {
                     UserDefaults.standard.set(weightInput, forKey: "weight")
                     UserDefaults.standard.synchronize()
+                    
+                    let target = UserDefaults.standard.string(forKey: "target")
+                    let weight = UserDefaults.standard.string(forKey: "weight")
+                    let kg = abs((target! as NSString).doubleValue - (weight! as NSString).doubleValue)
+                    
+                    self.planBtn.setTitle(String(format: "%.0f kg / Month", kg), for: .normal)
                     self.weightLabel.text = weightInput
                 }
 
