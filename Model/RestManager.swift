@@ -10,16 +10,10 @@ import Foundation
 
 class RestManager {
     var requestHttpHeaders = RestEntity()
-    
     var urlQueryParameters = RestEntity()
-    
     var httpBodyParameters = RestEntity()
-    
     var httpBody: Data?
     
-//    requestHttpHeaders.add(value: "application/json",forKey: "content-type")
-    
-    //appending parameters to URL
     private func addURLQueryParameters(toURL url: URL) -> URL {
         if urlQueryParameters.totalItems() > 0 {
             guard var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false) else { return url }
@@ -37,7 +31,7 @@ class RestManager {
         }
         return url
     }
-    //get HTTP body
+    
     private func getHttpBody() -> Data? {
         guard let contentType = requestHttpHeaders.value(forKey: "Content-Type") else { return nil }
         if contentType.contains("application/json"){
@@ -54,7 +48,6 @@ class RestManager {
         }
     }
     
-    //preparing the URL Request
     private func prepareRequest(withURL url: URL?, httpBody: Data?, httpMethod: HttpMethod) -> URLRequest? {
         guard let url = url else { return nil }
         var request = URLRequest(url: url)
@@ -66,7 +59,6 @@ class RestManager {
         return request
     }
     
-    //making web requests
     func makeRequest(toURL url: URL,
                      withHttpMethod httpMethod: HttpMethod,
                      completion: @escaping (_ result: Results) -> Void) {
@@ -90,7 +82,6 @@ class RestManager {
         }
     }
     
-    //fetching data from urls
     func getData(fromURL url: URL, completion: @escaping (_ data: Data?) -> Void)
     {
         DispatchQueue.global(qos: .userInteractive).async {
@@ -107,7 +98,6 @@ class RestManager {
 extension RestManager {
     struct RestEntity {
         private var values: [String: String] = [:]
-//        private var valueInt: [Int: String] = [:]
         
         mutating func add(value: String, forKey key: String)
         {

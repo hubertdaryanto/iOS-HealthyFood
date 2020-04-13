@@ -40,24 +40,13 @@ class PlanWeightVC: UIViewController {
     }
     
     @IBAction func weightTargetOkDidPressed(_ sender: UIButton) {
-        let target = weightTargetTextField.text!
         let plans = ["Gain", "Maintain", "Lose"]
         
         if validateInput(x: weightTargetTextField.text) {
             weightTargetTextField.resignFirstResponder()
         }
         
-        if pos == 1 {
-            //words
-//            kg = 0.0
-            weightTargetLabel.isHidden = true
-            weightTargetTextField.isHidden = true
-            weightTargetOkBtn.isHidden = true
-            planKgLabel.isHidden = true
-            inMonthLabel.isHidden = true
-        }
-        
-        let kgDecimal = String(format: "%.2f", getPlan(weight: Double(weight)!, targetParam: Double(target)!, pos: pos))
+        let kgDecimal = String(format: "%.2f", getPlan(weight: Double(weight)!, targetParam: (weightTargetTextField.text as! NSString).doubleValue, pos: pos))
         
         planKgLabel.text = "\(plans[pos]) \(kgDecimal) kg/day"
     }
@@ -74,9 +63,13 @@ class PlanWeightVC: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     @IBAction func getStartedBtnDidPressed(_ sender: Any) {
+        
         UserDefaults.standard.set(weightTargetTextField.text, forKey: "target")
         UserDefaults.standard.synchronize()
-        _ = validateInput(x: weightTargetTextField.text)
+        
+        if pos != 1 {
+            _ = validateInput(x: weightTargetTextField.text)
+        }
     }
     
     func getPlan(weight: Double, targetParam: Double, pos: Int) -> Double {
@@ -138,6 +131,15 @@ class PlanWeightVC: UIViewController {
         weightTargetOkBtn.isHidden = false
         planKgLabel.isHidden = false
         inMonthLabel.isHidden = false
+        
+        if pos == 1 {
+            //words
+            weightTargetLabel.isHidden = true
+            weightTargetTextField.isHidden = true
+            weightTargetOkBtn.isHidden = true
+            planKgLabel.isHidden = true
+            inMonthLabel.isHidden = true
+        }
         
         weightTargetTextField.keyboardType = .asciiCapableNumberPad
         weightTargetTextField.underlined()

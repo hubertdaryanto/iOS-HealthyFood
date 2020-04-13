@@ -23,12 +23,17 @@ class MealVC: UIViewController {
     var name: String?
     
     var meals = [Meal]()
-    var type = "Breakfast"
+    var type = ""
     var mealCount = 0
     var selectedMeal: Meal?
+    var myMeals = [Meal]()
+    
+    let mealViewIdentifier = "mealCell"
+    let myMealViewIdentifier = "myMealCell"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        type = "Breakfast"
         
         meals = Meal.getData()
         mealCollectionView.delegate = self
@@ -73,79 +78,27 @@ class MealVC: UIViewController {
         }
     }
     
-    func signByTime() {
-        let date = Date()
-        let calendar = Calendar.current
-        let hour = calendar.component(.hour, from: date)
-        
-        if hour >= 6 && hour <= 10 {
-            breakfastSign.alpha = 1.0
-        } else if hour >= 11 && hour <= 14 {
-            lunchSign.alpha = 1.0
-        } else if hour >= 17 && hour <= 23 {
-            dinnerSign.alpha = 1.0
-        }
-    }
+    
     
     func setupUI() {
-        makeRoundViewCorners()
+//        makeRoundViewCorners()
         
-        let timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true, block: { timer in
-            self.signByTime()
-        })
-        
-        timer.fire()
-        
+        name = UserDefaults.standard.string(forKey: "name")
         let myName = name ?? "Siri"
         
         helloLabel.text = "Hello, " + myName
-        
-        breakfastMeal.image = UIImage(named: meals[0].image)
-        lunchMeal.image = UIImage(named: meals[1].image)
-        dinnerMeal.image = UIImage(named: meals[2].image)
+            
+//        let images = [breakfastMeal, lunchMeal, dinnerMeal] as! [UIImageView]
+//        let sec = ["Breakfast", "Lunch", "Dinner"]
+//
+//        for i in 0 ..< 3 {
+//            if let url = URL(string: UserDefaults.standard.string(forKey: sec[i]) ?? "") {
+//                if let data = try? Data(contentsOf: url) {
+//                    images[i].image = UIImage(data: data)
+//                }
+//            }
+//        }
     }
-    
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using [segue destinationViewController].
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return false
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, performAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-    
-    }
-    */
-
 }
 
 extension MealVC: UICollectionViewDataSource {
@@ -154,38 +107,72 @@ extension MealVC: UICollectionViewDataSource {
    }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        mealCount = 0
-        for x in meals {
-            if x.type == type {
-                mealCount += 1
+        if collectionView == self.mealCollectionView {
+            mealCount = 0
+            for x in meals {
+                if x.type == type {
+                    mealCount += 1
+                }
             }
+            
+            return mealCount
+        } else {
+            return 3
         }
         
-        return mealCount
    }
 
    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealCell", for: indexPath) as! MealCell
-        
-        let meal = meals[indexPath.row]
-        
-        cell.meal = meal
+        if collectionView == self.mealCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealCell", for: indexPath) as! MealCell
+            
+            let meal = meals[indexPath.row]
+            
+            cell.meal = meal
 
-        let url = URL(string: "\(meal.image)")
-               let data = try? Data(contentsOf: url!)
-        cell.image.image = UIImage(data: data!)
-    
-        return cell
+            let url = URL(string: "\(meal.image)")
+            let data = try? Data(contentsOf: url!)
+            cell.image.image = UIImage(data: data!)
+        
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "myMealCell", for: indexPath) as! MyMealCell
+            myMeals = []
+            let sec = ["Breakfast", "Lunch", "Dinner"]
+            
+            for i in 0 ..< 3 {
+                myMeals.append(getMeal(imageURL: UserDefaults.standard.string(forKey: sec[i])!)!)
+            }
+            
+            let meal = myMeals[indexPath.row]
+            
+            cell.meal = meal
+            
+            let url = URL(string: "\(meal.image)")
+            let data = try? Data(contentsOf: url!)
+            cell.myMealImageView.image = UIImage(data: data!)
+            
+            return cell
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toRecipeDetailVC" {
             let recipeDetailVC = segue.destination as! RecipeDetailVC
             recipeDetailVC.meal = selectedMeal
+            recipeDetailVC.type = type
+        }
+    }
+    
+    func getMeal(imageURL: String) -> Meal? {
+        var meal: Meal?
+        for i in meals {
+            if i.image == imageURL {
+                meal = i
+            }
         }
         
-        let recipeDetailVC = RecipeDetailVC()
-        recipeDetailVC.meal = selectedMeal
+        return meal
     }
 }
 
