@@ -37,7 +37,7 @@ var temp : [Meal] = []
 
 func getUsersList(){
     guard let url = URL(string: "http://127.0.0.1:5000/meal/") else { return }
-    
+        
    //        rest.urlQueryParameters.add(value: "10", forKey: "page")
        
             rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
@@ -47,7 +47,8 @@ func getUsersList(){
                        decoder.keyDecodingStrategy = .convertFromSnakeCase
                        guard let meal = try? decoder.decode([NewMeal].self, from: data) else { return }
                        //kita coba pisahin ingredients dan steps secara manual dipisahkan dengan \n
-                       for items in meal{
+                        temp.removeAll()
+                    for items in meal[16...27]{
                            let ingredientitems = items.ingredients!.components(separatedBy: " \\n ")
                            let stepsitems = items.steps!.components(separatedBy: " \\n ")
                         temp.append(Meal(name: items.foodName!, calories: items.calories!, type: items.type!, image: items.imageURL!, recipes: ingredientitems, howTo: stepsitems))
@@ -154,5 +155,14 @@ class Meal {
         mealfromweb.append(Meal(name: "Steak", calories: 128, type: "Dinner", image: image, recipes: _recipes, howTo: _howTo))
         mealfromweb.append(Meal(name: "Rib", calories: 129, type: "Dinner", image: image, recipes: _recipes, howTo: _howTo))
         return mealfromweb
+    }
+    
+    static func getData() -> [Meal]
+    {
+        if temp .isEmpty{
+            temp = fetchMeals()
+        }
+        let gotcha: [Meal] = temp
+        return gotcha
     }
 }
