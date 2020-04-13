@@ -24,14 +24,17 @@ class ProfileVC: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     var updateWeightTextField: UITextField!
 
-    let calories: Int = 3000
+    var calories: Int = 0
     var flag: Int = 0
     let defaults = UserDefaults.standard
+    
+    var myMeals: [Meal]!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.kcalBGView.layer.cornerRadius = kcalBGView.frame.size.width / 2
+        calories = 3000
         
         let objects: Any = [bmiView, heightView, weightView, updateWeightBtn, planBtn]
         applyRoundedCorner(objects as! [AnyObject])
@@ -59,7 +62,27 @@ class ProfileVC: UIViewController {
         weightLabel.text = weight
         
         bmiLabel.text = String(format: "%.1f", (bmi! as NSString).doubleValue)
-        calorieLeftLabel.text = gender == "Male" ? "\(calories)" : "\(calories - 1000)"
+        calorieLeftLabel.text = gender == "Male" ? "\(calcCalleft())" : "\(calcCalleft() - 1000)"
+    }
+    
+    func getMeal(imageURL: String) -> Meal? {
+        var meal: Meal? = nil
+        for i in myMeals {
+            if i.image == imageURL {
+                return i
+            }
+        }
+        
+        return meal
+    }
+    
+    func calcCalleft() -> Int {
+        var theCal = 0
+        for i in 0 ..< 3 {
+            theCal += myMeals[i].calories
+        }
+        
+        return (calories - theCal)
     }
     
     fileprivate func formBtnTitle(_ kg: Double) -> String {

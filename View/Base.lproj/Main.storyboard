@@ -356,7 +356,7 @@
                                 <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <state key="normal" backgroundImage="person.circle.fill" catalog="system"/>
                                 <connections>
-                                    <segue destination="qkU-N5-gOH" kind="presentation" modalPresentationStyle="fullScreen" id="s3r-YW-FhX"/>
+                                    <segue destination="qkU-N5-gOH" kind="presentation" identifier="toProfileVC" modalPresentationStyle="fullScreen" id="s3r-YW-FhX"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your meal :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8y-c0-zDA">
@@ -487,6 +487,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="a9a-kf-WhC"/>
                     </view>
+                    <navigationItem key="navigationItem" id="CCy-RB-L0j"/>
                     <connections>
                         <outlet property="helloLabel" destination="HsH-Sr-W5S" id="EaW-k6-M9r"/>
                         <outlet property="mealCollectionView" destination="2By-zK-hd9" id="vTx-Qc-r6o"/>

@@ -170,7 +170,7 @@ class Meal {
     
     static func getData() -> [Meal]
     {
-        if temp .isEmpty{
+        if temp.isEmpty{
             temp = fetchMeals()
         }
         let gotcha: [Meal] = temp

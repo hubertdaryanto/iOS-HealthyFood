@@ -34,6 +34,7 @@ class RecipeDetailVC: UIViewController {
         if pos == 1 {
             addToMyMealButton.isHidden = true
         }
+        pos = 0
         
         addToMyMealButton.layer.cornerRadius = 16
     }
@@ -43,12 +44,6 @@ class RecipeDetailVC: UIViewController {
         UserDefaults.standard.set(meal.image, forKey: type!)
         performSegue(withIdentifier: "toMealVC", sender: self)
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "toMealVC" {
-//
-//        }
-//    }
 }
 
 extension RecipeDetailVC: UITableViewDelegate, UITableViewDataSource {
@@ -96,5 +91,4 @@ extension RecipeDetailVC: UITableViewDelegate, UITableViewDataSource {
         
         return cell
     }
-    
 }

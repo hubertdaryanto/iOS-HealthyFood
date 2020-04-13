@@ -207,6 +207,9 @@ extension MealVC: UICollectionViewDataSource {
             recipeDetailVC.type = type
             
             recipeDetailVC.pos = pos
+        } else if segue.identifier == "toProfileVC" {
+            let profileVC = segue.destination as! ProfileVC
+            profileVC.myMeals = myMeals
         }
     }
     
@@ -219,7 +222,6 @@ extension MealVC: UICollectionViewDataSource {
         }
         
         return meal
-        
     }
 }
 
