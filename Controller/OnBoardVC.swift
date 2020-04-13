@@ -13,7 +13,7 @@ class OnBoardVC: UIViewController {
     @IBOutlet weak var proceedBtn: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        Meal.fetchMeals()
         self.proceedBtn.layer.cornerRadius = 20
     }
     

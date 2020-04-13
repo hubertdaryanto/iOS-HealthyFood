@@ -71,7 +71,7 @@ class RestManager {
                      withHttpMethod httpMethod: HttpMethod,
                      completion: @escaping (_ result: Results) -> Void) {
      
-        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+        DispatchQueue.global(qos: .userInteractive).async { [weak self] in
             let targetURL = self?.addURLQueryParameters(toURL: url)
             let httpBody = self?.getHttpBody()
             guard let request = self?.prepareRequest(withURL: targetURL, httpBody: httpBody, httpMethod: httpMethod) else {
@@ -93,7 +93,7 @@ class RestManager {
     //fetching data from urls
     func getData(fromURL url: URL, completion: @escaping (_ data: Data?) -> Void)
     {
-        DispatchQueue.global(qos: .userInitiated).async {
+        DispatchQueue.global(qos: .userInteractive).async {
             let sessionConfiguration = URLSessionConfiguration.default
             let session = URLSession(configuration: sessionConfiguration)
             let task = session.dataTask(with: url, completionHandler: { (data, response, error ) in guard let data = data else { completion(nil); return }
