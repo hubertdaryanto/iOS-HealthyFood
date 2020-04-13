@@ -96,6 +96,7 @@
 		D13B2DED24385DF9004CE335 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13B2DEC24385DF9004CE335 /* ProfileVC.swift */; };
 		D13B2DF324385F8B004CE335 /* OnBoardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D13B2DF224385F8B004CE335 /* OnBoardVC.swift */; };
 		D148E267243CDDFB0097CC2B /* MealData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D148E266243CDDFB0097CC2B /* MealData.swift */; };
+		D18FA82424441D5E00FEEED0 /* MyMealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D18FA82324441D5E00FEEED0 /* MyMealCell.swift */; };
 		D1DA2B0D243C372400064558 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA2B0C243C372400064558 /* Meal.swift */; };
 		D1DA2B11243C58F700064558 /* MealCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA2B10243C58F700064558 /* MealCell.swift */; };
 		D1DA2B13243C5AD300064558 /* MealVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA2B12243C5AD300064558 /* MealVC.swift */; };
@@ -196,6 +197,7 @@
 		D13B2DEC24385DF9004CE335 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
 		D13B2DF224385F8B004CE335 /* OnBoardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardVC.swift; sourceTree = "<group>"; };
 		D148E266243CDDFB0097CC2B /* MealData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealData.swift; sourceTree = "<group>"; };
+		D18FA82324441D5E00FEEED0 /* MyMealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyMealCell.swift; sourceTree = "<group>"; };
 		D1DA2B0C243C372400064558 /* Meal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		D1DA2B10243C58F700064558 /* MealCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealCell.swift; sourceTree = "<group>"; };
 		D1DA2B12243C5AD300064558 /* MealVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MealVC.swift; sourceTree = "<group>"; };
@@ -317,6 +319,7 @@
 				D1DA2B10243C58F700064558 /* MealCell.swift */,
 				D1DA2B12243C5AD300064558 /* MealVC.swift */,
 				D1191F6E243E12940070CB1B /* PlanWeightVC.swift */,
+				D18FA82324441D5E00FEEED0 /* MyMealCell.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -536,6 +539,7 @@
 				D13B2DF324385F8B004CE335 /* OnBoardVC.swift in Sources */,
 				D1DA569F243845F100F68FCC /* SceneDelegate.swift in Sources */,
 				CDE501D62441A66A0006A135 /* RestManager.swift in Sources */,
+				D18FA82424441D5E00FEEED0 /* MyMealCell.swift in Sources */,
 				D1DA2B13243C5AD300064558 /* MealVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
