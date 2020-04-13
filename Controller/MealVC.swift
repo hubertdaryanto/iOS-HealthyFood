@@ -9,7 +9,6 @@
 import UIKit
 
 class MealVC: UIViewController {
-
     @IBOutlet weak var mealCollectionView: UICollectionView!
     @IBOutlet weak var typeSegmentedControl: UISegmentedControl!
     @IBOutlet weak var preferredTimeLabel: UILabel!
@@ -19,41 +18,63 @@ class MealVC: UIViewController {
     @IBOutlet weak var breakfastSign: UIView!
     @IBOutlet weak var lunchSign: UIView!
     @IBOutlet weak var dinnerSign: UIView!
+    @IBOutlet weak var helloLabel: UILabel!
+    
+    var name: String?
     
     var meals = [Meal]()
     var type = "Breakfast"
     var mealCount = 0
-    
-    func makeRoundViewCorners() {
-        let signs: Any = [breakfastSign, lunchSign, dinnerSign]
-        let mealImages: Any = [breakfastMeal, lunchMeal, dinnerMeal]
-        applyRoundedCorner(signs as! [AnyObject], value: 10.0)
-        applyRoundedCorner(mealImages as! [AnyObject] , value: 20.0)
-    }
+    var selectedMeal: Meal?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         meals = Meal.fetchMeals()
-
+        print(meals.count)
         mealCollectionView.delegate = self
         mealCollectionView.dataSource = self
         
-        makeRoundViewCorners()
-        
-        let timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true, block: { timer in
-            self.signByTime()
-        })
-        
-        timer.fire()
-        breakfastMeal.image = UIImage(named: meals[0].image)
-        lunchMeal.image = UIImage(named: meals[1].image)
-        dinnerMeal.image = UIImage(named: meals[2].image)
+        setupUI()
     }
+    
+    func makeRoundViewCorners() {
+       let signs: Any = [breakfastSign, lunchSign, dinnerSign]
+       let mealImages: Any = [breakfastMeal, lunchMeal, dinnerMeal]
+       applyRoundedCorner(signs as! [AnyObject], value: 10.0)
+       applyRoundedCorner(mealImages as! [AnyObject] , value: 20.0)
+   }
+    
+//    func getUsersList(){
+//            guard let url = URL(string: "http://127.0.0.1:5000/meal/") else { return }
+//            
+//    //        rest.urlQueryParameters.add(value: "10", forKey: "page")
+//                rest.makeRequest(toURL: url, withHttpMethod: .get) { (results) in
+//                    if let data = results.data {
+//                        
+//                        let decoder = JSONDecoder()
+//                        decoder.keyDecodingStrategy = .convertFromSnakeCase
+//                        guard let meal = try? decoder.decode([NewMeal].self, from: data) else { return }
+//                        //kita coba pisahin ingredients dan steps secara manual dipisahkan dengan \n
+//                        for items in meal{
+//                            let ingredientitems = items.ingredients!.components(separatedBy: " \\n ")
+//                            let stepsitems = items.steps!.components(separatedBy: " \\n ")
+//                            self.meals.append(Meal(name: items.foodName!, calories: items.calories!, type: items.type!, image: items.imageURL!, recipes: ingredientitems, howTo: stepsitems))
+//                            
+//                        }
+//                    }
+//                    print("\n\nResponse HTTP Headers:\n")
+//                    if let response = results.response {
+//                        for (key, value) in response.headers.allValues() {
+//                            print(key, value)
+//                        }
+//                    }
+//            }
+//            }
     
     @IBAction func typeSegmentPressed(_ sender: Any) {
         meals = Meal.fetchMeals()
-        
+        print(meals.count)
         switch typeSegmentedControl.selectedSegmentIndex {
         case 0: type = "Breakfast"; preferredTimeLabel.text = "06.00 AM - 10.00 AM"
         case 1: type = "Lunch"; preferredTimeLabel.text = "11.00 AM - 02.00 PM"
@@ -64,6 +85,7 @@ class MealVC: UIViewController {
         var a = [Meal]()
         
         for x in 0 ..< meals.count {
+            print(meals[x].type)
             if meals[x].type == type {
                 a.append(meals[x])
             }
@@ -71,17 +93,6 @@ class MealVC: UIViewController {
         
         meals = a
         mealCollectionView.reloadData()
-
-    
-//        meals = Meal.fetchMeals()
-//
-//        for x in 0 ..< mealCount {
-//            if meals[x].type != type {
-//                meals.remove(at: x)
-//            }
-//        }
-//
-//        mealCollectionView.reloadData()
     }
     
     func applyRoundedCorner(_ objects: [AnyObject], value: CGFloat){
@@ -102,6 +113,24 @@ class MealVC: UIViewController {
         } else if hour >= 17 && hour <= 23 {
             dinnerSign.alpha = 1.0
         }
+    }
+    
+    func setupUI() {
+        makeRoundViewCorners()
+        
+        let timer = Timer.scheduledTimer(withTimeInterval: 60.0, repeats: true, block: { timer in
+            self.signByTime()
+        })
+        
+        timer.fire()
+        
+        let myName = name ?? "Siri"
+        
+        helloLabel.text = "Hello, " + myName
+        
+        breakfastMeal.image = UIImage(named: meals[0].image)
+        lunchMeal.image = UIImage(named: meals[1].image)
+        dinnerMeal.image = UIImage(named: meals[2].image)
     }
     
     /*
@@ -167,17 +196,36 @@ extension MealVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "mealCell", for: indexPath) as! MealCell
         
         let meal = meals[indexPath.row]
-    
+        
         cell.meal = meal
+
+        let url = URL(string: "\(meal.image)")
+               let data = try? Data(contentsOf: url!)
+        cell.image.image = UIImage(data: data!)
     
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toRecipeDetailVC" {
+            let recipeDetailVC = segue.destination as! RecipeDetailVC
+            recipeDetailVC.meal = selectedMeal
+        }
+        
+        let recipeDetailVC = RecipeDetailVC()
+        recipeDetailVC.meal = selectedMeal
     }
 }
 
 extension MealVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
+        
+        selectedMeal = meals[indexPath.row]
+        
+        performSegue(withIdentifier: "toRecipeDetailVC", sender: self)
     }
+    
 }
 
 extension MealVC: MealDelegate {
