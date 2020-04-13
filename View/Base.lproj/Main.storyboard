@@ -2,7 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="qkU-N5-gOH">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16086"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -780,13 +780,13 @@
             <point key="canvasLocation" x="3824.6376811594205" y="145.98214285714286"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="arrow.left" catalog="system" width="64" height="48"/>
-        <image name="illustration" width="375" height="267"/>
-        <image name="person.circle.fill" catalog="system" width="64" height="60"/>
-    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="0Jf-vJ-pTZ"/>
         <segue reference="fNt-3W-3Ge"/>
     </inferredMetricsTieBreakers>
+    <resources>
+        <image name="arrow.left" catalog="system" width="128" height="98"/>
+        <image name="illustration" width="375" height="267"/>
+        <image name="person.circle.fill" catalog="system" width="128" height="121"/>
+    </resources>
 </document>
