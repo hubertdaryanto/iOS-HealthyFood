@@ -63,9 +63,13 @@ class PlanWeightVC: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     @IBAction func getStartedBtnDidPressed(_ sender: Any) {
+        
         UserDefaults.standard.set(weightTargetTextField.text, forKey: "target")
         UserDefaults.standard.synchronize()
-        _ = validateInput(x: weightTargetTextField.text)
+        
+        if pos != 1 {
+            _ = validateInput(x: weightTargetTextField.text)
+        }
     }
     
     func getPlan(weight: Double, targetParam: Double, pos: Int) -> Double {
