@@ -18,10 +18,11 @@ class RecipeDetailVC: UIViewController {
     let sectionTitles = ["Calories", "Ingredients", "How to Cook"]
     var meal: Meal!
     var type: String!
+    var pos: Int!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        addToMyMealButton.isHidden = false
         foodNameLabel.text = meal.name
         
         recipeTable.delegate = self
@@ -30,6 +31,9 @@ class RecipeDetailVC: UIViewController {
         let url = URL(string: "\(meal.image)")
         let data = try? Data(contentsOf: url!)
         foodImage.image = UIImage(data: data!)
+        if pos == 1 {
+            addToMyMealButton.isHidden = true
+        }
         
         addToMyMealButton.layer.cornerRadius = 16
     }
