@@ -142,15 +142,10 @@ class Meal {
     }
     
     static func fetchMeals() -> [Meal] {
-        let _recipes = ["awecibeqcirybeibcqeibceibcdhpbcdsacubev abv iaehrbv", "b"]
-        let _howTo = ["c", "d"]
-        let image = ["https://img.buzzfeed.com/video-api-prod/assets/bd2e246b2883465abaad8fb68739f6db/BFV4562_CheesyEggToast-Thumb1080.jpg",
-                     "https://gimmedelicious.com/wp-content/uploads/2016/07/avocado-toast-7-of-13-500x500.jpg",
-                     "https://i.ytimg.com/vi/hvUPpz6rTno/hqdefault.jpg",
-                     "https://static01.nyt.com/images/2016/11/29/dining/recipelab-chick-noodle-still/recipelab-chick-noodle-still-mediumThreeByTwo440.jpg",
-                     "https://www.chinasichuanfood.com/wp-content/uploads/2014/02/bok-choy-stir-fryth-1-500x375.jpg",
-                     "https://media-cdn.tripadvisor.com/media/photo-s/17/61/6a/4b/in-our-house-marbled.jpg",
-                     "https://i.pinimg.com/474x/05/07/2d/05072d371ce2071beaf910f6b92088fc.jpg"]
+        let _recipes = ["1 teaspoon macadamia oil", "250g pork fillet", "thinly sliced  200g peeled green prawns  2 garlic cloves", "crushed  1 teaspoon sambal oelek  2 teaspoons finely grated fresh ginger  200g green beans", "thinly sliced  1 bunch broccolini", "cut into 3cm lengths  1 large carrot", "peeled", "cut into matchsticks  355g (2 cups) cooked brown rice  2 tablespoons tomato puree", "2 teaspoon gluten-free salt-reduced soy sauce", "4 eggs", "1 tablespoon canola oil (or vegetable oil)", "1 small onion (white or yellow", "diced)", "1 egg", "1 clove garlic (minced) /n 3 green onions (diced)", "1/2 teaspoon cumin", "3/4 cup mushrooms (fresh", "diced small)", "1 (15-ounce) can pinto beans", "1 teaspoon parsley", "salt", "black pepper", "2 tablespoons oil"]
+        let _howTo = ["In a large bowl, thoroughly mix all ingredients" , "Evenly form into 6 patties, each about 3 1/2 inches wide" , "Bring a grill pan (or large skillet) sprayed with nonstick spray to medium-high heat" , "Cook patties for 4 minutes per side, or until cooked to your preference, working in batches as needed."]
+        let image = ["https://d2gtpjxvvd720b.cloudfront.net/system/recipe/image/1032/retina_hg-100-Calorie-Beef-Patties.jpg",           "https://img.taste.com.au/lJBhrDy5/w720-h480-cfill-q80/taste/2019/08/healthy-nasigoreng-p76-152834-2.jpg", "https://www.thespruceeats.com/thmb/nrYyvCEx_MInkaIj6Pu2WJ3hSxQ=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/vegan-mushroom-bean-burger-recipe-3378623-13_preview1-5b241897fa6bcc0036d2c9bf.jpeg", "https://img.taste.com.au/tuTwIC2l/w720-h480-cfill-q80/taste/2016/11/chicken-gado-gado-salad-105286-1.jpeg", "https://img-global.cpcdn.com/recipes/b057a5fbc1e8d961/1280x1280sq70/photo.jpg", "https://img.taste.com.au/CwL3WSZV/w720-h480-cfill-q80/taste/2016/11/mama-ks-kue-soes-88765-1.jpeg", "https://img.taste.com.au/2NcemqLG/w720-h480-cfill-q80/taste/2016/11/prawn-tom-yum-103777-1.jpeg", "https://www.thespruceeats.com/thmb/ULlFXvxW4UDsFJcLLZcACzKYc3Q=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/pork-chops-gravy-73110363-56a8c4655f9b58b7d0f4ef89.jpg" , "https://www.thespruceeats.com/thmb/fNAmRtg1qUyzP5oAUpOtyDfSRRE=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/classic-beef-stroganoff-3051443-11_preview-5afc96558e1b6e0036d49d3a.jpeg" , "https://www.thespruceeats.com/thmb/QV5oZWHOIvYW3TYfgsPV6Hl7PtU=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/basic-french-toast-3056820-10_preview-5b15a30404d1cf0037aaa15e.jpeg" , "https://img.taste.com.au/h0e_QQVy/w720-h480-cfill-q80/taste/2016/11/prawn-and-rice-noodles-87689-1.jpeg" , "https://www.thespruceeats.com/thmb/AjQEAatd8ropthQxlxN0p5zTd7s=/960x0/filters:no_upscale():max_bytes(150000):strip_icc()/breakfast-casserole-sausage-potato-18-56a8ba445f9b58b7d0f4a212.jpg"]
+        
         getUsersList()
         var mealfromweb = temp
         mealfromweb.append(Meal(name: "Egg Toast", calories: 123, type: "Breakfast", image: image[0], recipes: _recipes, howTo: _howTo))
@@ -160,6 +155,11 @@ class Meal {
         mealfromweb.append(Meal(name: "Bok Choy", calories: 127, type: "Lunch", image: image[4], recipes: _recipes, howTo: _howTo))
         mealfromweb.append(Meal(name: "Steak", calories: 128, type: "Dinner", image: image[5], recipes: _recipes, howTo: _howTo))
         mealfromweb.append(Meal(name: "Rib", calories: 129, type: "Dinner", image: image[6], recipes: _recipes, howTo: _howTo))
+        mealfromweb.append(Meal(name: "Rib", calories: 129, type: "Dinner", image: image[7], recipes: _recipes, howTo: _howTo))
+        mealfromweb.append(Meal(name: "Rib", calories: 129, type: "Dinner", image: image[8], recipes: _recipes, howTo: _howTo))
+        mealfromweb.append(Meal(name: "Rib", calories: 129, type: "Dinner", image: image[9], recipes: _recipes, howTo: _howTo))
+        mealfromweb.append(Meal(name: "Rib", calories: 129, type: "Dinner", image: image[10], recipes: _recipes, howTo: _howTo))
+        mealfromweb.append(Meal(name: "Rib", calories: 129, type: "Dinner", image: image[11], recipes: _recipes, howTo: _howTo))
         
         UserDefaults.standard.set(image[0], forKey: "Breakfast")
         UserDefaults.standard.set(image[3], forKey: "Lunch")
