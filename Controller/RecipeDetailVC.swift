@@ -34,6 +34,10 @@ class RecipeDetailVC: UIViewController {
         if pos == 1 {
             addToMyMealButton.isHidden = true
         }
+        else
+        {
+            addToMyMealButton.isHidden = false
+        }
         pos = 0
         
         addToMyMealButton.layer.cornerRadius = 16
@@ -80,13 +84,13 @@ extension RecipeDetailVC: UITableViewDelegate, UITableViewDataSource {
         
         switch sectionTitles[indexPath.section] {
         case "Calories":
-            cell.textLabel!.text = "\(meal.calories) kcal"
+            cell.textLabel!.text = "\(meal.calories) cal"
         case "Ingredients":
             cell.textLabel!.text = "\(meal.ingredients[indexPath.row])"
         case "How to Cook":
             cell.textLabel!.text = "\(meal.steps[indexPath.row])"
         default:
-            cell.textLabel!.text = "\(meal.calories) + kcal"
+            cell.textLabel!.text = "\(meal.calories) + cal"
         }
         
         return cell

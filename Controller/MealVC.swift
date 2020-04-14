@@ -233,6 +233,7 @@ extension MealVC: UICollectionViewDelegate {
             
             selectedMeal = temp[indexPath.row]
             
+            pos = 0
             performSegue(withIdentifier: "toRecipeDetailVC", sender: self)
         } else {
             print(indexPath.row)
