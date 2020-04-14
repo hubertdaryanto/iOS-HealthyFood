@@ -142,7 +142,7 @@ class Meal {
     }
     
     static func fetchMeals() -> [Meal] {
-        let _recipes = ["a", "b"]
+        let _recipes = ["awecibeqcirybeibcqeibceibcdhpbcdsacubev abv iaehrbv", "b"]
         let _howTo = ["c", "d"]
         let image = ["https://img.buzzfeed.com/video-api-prod/assets/bd2e246b2883465abaad8fb68739f6db/BFV4562_CheesyEggToast-Thumb1080.jpg",
                      "https://gimmedelicious.com/wp-content/uploads/2016/07/avocado-toast-7-of-13-500x500.jpg",
