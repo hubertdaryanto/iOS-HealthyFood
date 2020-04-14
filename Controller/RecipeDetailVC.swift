@@ -81,6 +81,7 @@ extension RecipeDetailVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "recipeTableCell", for: indexPath)
+        cell.textLabel?.numberOfLines = 0;
         
         switch sectionTitles[indexPath.section] {
         case "Calories":
